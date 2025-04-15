@@ -1,0 +1,28 @@
+{
+  "name": "coupler-io-mcp-server",
+  "version": "0.0.1",
+  "main": "index.js",
+  "type": "module",
+  "homepage": "https://coupler.io",
+  "bin": {
+    "coupler-io-mcp-server": "./dist/index.js"
+  },
+  "scripts": {
+    "start": "bun src/index.ts",
+    "inspect": "bun mcp-inspector bun src/index.ts",
+    "lint": "eslint src/ --ext .ts"
+  },
+  "description": "Coupler.io MCP server",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.9.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.24.0",
+    "@modelcontextprotocol/inspector": "0.8.2",
+    "@types/node": "22.14.0",
+    "eslint": "9.24.0",
+    "lefthook": "1.11.9",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.29.1"
+  }
+}

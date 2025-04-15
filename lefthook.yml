@@ -1,0 +1,6 @@
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      glob: '*.{ts,tsx,js,jsx}'
+      run: bun eslint {staged_files} --ext .ts,.tsx

@@ -18,9 +18,11 @@ pids
 .env.test.local
 .env.production.local
 .env.local
+.env.example
 
 Dockerfile*
 .dockerignore
+docker
 
 README.md
 .vscode

@@ -7,7 +7,9 @@
     "allowJs": true,
     "paths": {
       "@/tools/*": ["./src/tools/*"],
-      "@/server/*": ["./src/server/*"]
+      "@/server/*": ["./src/server/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/env": ["./src/env"],
     },
 
     // Bundler mode

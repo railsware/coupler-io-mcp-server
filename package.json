@@ -14,11 +14,14 @@
   },
   "description": "Coupler.io MCP server",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.9.0"
+    "@modelcontextprotocol/sdk": "1.9.0",
+    "znv": "0.5.0",
+    "zod": "3.24.3"
   },
   "devDependencies": {
     "@eslint/js": "9.24.0",
-    "@modelcontextprotocol/inspector": "0.8.2",
+    "@modelcontextprotocol/inspector": "0.10.2",
+    "@types/bun": "^1.2.10",
     "@types/node": "22.14.0",
     "eslint": "9.24.0",
     "lefthook": "1.11.9",

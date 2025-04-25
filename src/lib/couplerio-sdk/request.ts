@@ -1,4 +1,4 @@
-import { COUPLER_API_HOST } from '@/env'
+import { COUPLER_API_HOST, COUPLER_ACCESS_TOKEN } from '@/env'
 
 type RequestOptions = {
   method: string
@@ -12,7 +12,7 @@ export const request = (path: string, options: RequestOptions = { method: 'GET' 
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      // Authorization: `Bearer ${COUPLER_ACCESS_TOKEN}`,
+      Authorization: `Bearer ${COUPLER_ACCESS_TOKEN}`,
     },
   })
 }

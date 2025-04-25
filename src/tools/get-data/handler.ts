@@ -28,7 +28,7 @@ export const handler = async (params: Record<string, unknown> | undefined): Prom
     content: [
       {
         type: 'text',
-        text: `The file is at /tmp/dataflows/${dataflowId}.sqlite. Data: ${JSON.stringify(queryResult, null, 2)}`,
+        text: `The file is at /tmp/dataflows/${dataflowId}/rows.sqlite. Data: ${JSON.stringify(queryResult, null, 2)}`,
       }
     ]
   }

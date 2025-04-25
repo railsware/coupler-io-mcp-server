@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "bun src/index.ts",
-    "inspect": "bun mcp-inspector bun src/index.ts",
+    "inspect": "bun mcp-inspector bun --watch src/index.ts",
     "lint": "eslint src/ --ext .ts"
   },
   "description": "Coupler.io MCP server",

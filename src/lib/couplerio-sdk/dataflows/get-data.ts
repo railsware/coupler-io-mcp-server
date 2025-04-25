@@ -1,60 +1,68 @@
 import { mkdir } from 'node:fs/promises'
 import { request } from '@/lib/couplerio-sdk/request'
-import { COUPLER_API_HOST, STORAGE_HOST } from '@/env'
+import { STORAGE_HOST } from '@/env'
 
 export const DOWNLOAD_DIR = '/tmp/dataflows'
 const STORAGE_URL = new URL(STORAGE_HOST)
-const COUPLER_API_URL = new URL(COUPLER_API_HOST)
+
+const parseUrl = (url: string): URL => {
+  const parsedUrl = new URL(url)
+
+  parsedUrl.host = STORAGE_URL.host
+  parsedUrl.protocol = STORAGE_URL.protocol
+  parsedUrl.port = STORAGE_URL.port
+
+  return parsedUrl
+}
+
+const downloadToFile = async (url: URL, filePath: string) => {
+  const fileResponse = await fetch(url.toString())
+  if (!fileResponse.ok) {
+    throw new Error(`Failed to download file: ${fileResponse.status} ${fileResponse.statusText}`)
+  }
+  await Bun.write(filePath, fileResponse)
+}
 
 type GetDataArgs = { dataflowId: string }
 
 export const getData = async ({ dataflowId }: GetDataArgs): Promise<string> => {
-  const filePath = `${DOWNLOAD_DIR}/${dataflowId}.sqlite`
-  // if (await Bun.file(filePath).exists()) {
-  //   return filePath
-  // }
+  const path = `/v1/dataflows/${dataflowId}/signed_urls`
+  const signedUrlsRequest = request(path, { method: 'POST' })
 
-  const path = `/api/workflows/${dataflowId}/export_url`
-  const exportUrlRequest = request(path, { method: 'POST' })
-
-  const exportUrlResponse = await fetch(exportUrlRequest)
-  if (!exportUrlResponse.ok) {
-    throw new Error(`Failed to get export URL for dataflow ${dataflowId}: ${exportUrlResponse.status} ${exportUrlResponse.statusText}`)
+  const signedUrlsResponse = await fetch(signedUrlsRequest)
+  if (!signedUrlsResponse.ok) {
+    throw new Error(`Failed to get signed URLs for dataflow ${dataflowId}: ${signedUrlsResponse.status} ${signedUrlsResponse.statusText}`)
   }
 
-  const payload = await exportUrlResponse.json() as { export_url: string }
-  if (!payload || !payload.export_url) {
-    throw new Error(`Unexpected response from export URL request: ${JSON.stringify(payload)}`)
+  const payload = await signedUrlsResponse.json() as { sqlite_file: string, schema_file: string }
+  if (!payload || !payload.sqlite_file || !payload.schema_file) {
+    throw new Error(`Unexpected response from signed URLs request: ${JSON.stringify(payload)}`)
   }
 
-  console.error(`Export URL: ${payload.export_url}`)
+  console.error(`
+    Sqlite Signed URL: ${payload.sqlite_file}
+    -----------------------------
+    Schema Signed URL: ${payload.schema_file}
+  `)
 
-  const parsedExportUrl = new URL(payload.export_url)
-  parsedExportUrl.host = COUPLER_API_URL.host
-  parsedExportUrl.protocol = COUPLER_API_URL.protocol
-  parsedExportUrl.port = COUPLER_API_URL.port
+  const parsedSqliteUrl = parseUrl(payload.sqlite_file)
+  const parsedSchemaUrl = parseUrl(payload.schema_file)
 
-  const downloadResponse = await fetch(parsedExportUrl.toString(), { redirect: 'manual' })
-  const fileUrl = downloadResponse.headers.get('Location')
+  console.error(`
+    Sqlite Parsed URL: ${parsedSqliteUrl}
+    -----------------------------
+    Schema Parsed URL: ${parsedSchemaUrl}
+  `)
 
-  console.error(`File URL: ${fileUrl}`)
-  const parsedFileUrl = new URL(fileUrl!)
-
-  parsedFileUrl.host = STORAGE_URL.host
-  parsedFileUrl.protocol = STORAGE_URL.protocol
-  parsedFileUrl.port = STORAGE_URL.port
-
-  console.error(`Parsed file URL: ${parsedFileUrl}`)
-
-  const fileResponse = await fetch(parsedFileUrl.toString())
+  const sqliteFilePath = `${DOWNLOAD_DIR}/${dataflowId}/rows.sqlite`
+  const schemaFilePath = `${DOWNLOAD_DIR}/${dataflowId}/schema.json`
 
   await mkdir(DOWNLOAD_DIR, { recursive: true })
 
-  if (!fileResponse.ok) {
-    throw new Error(`Failed to download data file for dataflow ${dataflowId}: ${fileResponse.status} ${fileResponse.statusText}`)
-  }
+  await Promise.all([
+    downloadToFile(parsedSqliteUrl, sqliteFilePath),
+    downloadToFile(parsedSchemaUrl, schemaFilePath)
+  ])
 
-  await Bun.write(filePath, fileResponse)
-
-  return filePath
+  return sqliteFilePath
 }

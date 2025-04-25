@@ -2,7 +2,7 @@ FROM oven/bun:1.2.10-slim AS base
 
 ENV NODE_ENV=development
 ENV STORAGE_HOST=http://storage.test:4443
-ENV COUPLER_API_HOST=http://host.docker.internal:3000
+ENV COUPLER_API_HOST=http://api.lvh.me:3000
 
 WORKDIR /app
 

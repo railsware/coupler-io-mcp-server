@@ -38,9 +38,14 @@ Caveat: make sure to keep only a single inspector tab open at all times, until [
 bun inspect
 ```
 
-### Containerize and run with Docker
+### Build and run with Docker
 ```shell
-docker build -t coupler_mcp -f docker/Dockerfile .
+docker build \
+  --build-arg NODE_ENV=development \
+  --build-arg COUPLER_API_HOST=http://api.lvh.me:3000 \
+  --build-arg STORAGE_HOST=http://storage.test:4443 \
+   -t coupler_mcp -f docker/Dockerfile .
+
 docker run --rm -i coupler_mcp
 ```
 
@@ -62,4 +67,9 @@ docker run --rm -i coupler_mcp
     }
   }
 }
+```
+
+### Build Docker image for release
+```shell
+docker build -t <release_tag> -f docker/Dockerfile .
 ```

@@ -1,8 +1,12 @@
 FROM oven/bun:1.2.10-slim AS base
 
-ENV NODE_ENV=development
-ENV STORAGE_HOST=http://storage.test:4443
-ENV COUPLER_API_HOST=http://api.lvh.me:3000
+ARG NODE_ENV=production
+ARG COUPLER_API_HOST=https://api.coupler.io
+ARG STORAGE_HOST
+
+ENV NODE_ENV=$NODE_ENV
+ENV COUPLER_API_HOST=$COUPLER_API_HOST
+ENV STORAGE_HOST=$STORAGE_HOST
 
 WORKDIR /app
 

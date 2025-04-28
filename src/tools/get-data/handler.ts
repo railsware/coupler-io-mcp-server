@@ -2,7 +2,7 @@ import { Database } from 'bun:sqlite'
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 import { validateParams } from './validate-params'
 import { getData } from '@/lib/couplerio-sdk/dataflows/get-data'
-import { server } from '@/server/index.js'
+import { server } from '@/server'
 
 export const handler = async (params: Record<string, unknown> | undefined): Promise<CallToolResult> => {
   validateParams(params)

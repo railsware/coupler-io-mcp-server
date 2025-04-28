@@ -38,6 +38,12 @@ Caveat: make sure to keep only a single inspector tab open at all times, until [
 bun inspect
 ```
 
+### Tail logs
+```shell
+tail -f log/development.log | bun pino-pretty
+```
+You can also optionally capture STDIO messages in the log file by setting `LOG_STDIO=1` when running the server.
+
 ### Build and run with Docker
 ```shell
 docker build \

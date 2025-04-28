@@ -9,23 +9,25 @@
   },
   "scripts": {
     "start": "bun src/index.ts",
-    "inspect": "bun mcp-inspector bun --watch src/index.ts",
+    "inspect": "bun mcp-inspector -- bun --watch src/index.ts",
     "lint": "eslint src/ --ext .ts"
   },
   "description": "Coupler.io MCP server",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.9.0",
+    "@modelcontextprotocol/sdk": "1.10.2",
+    "pino": "9.6.0",
     "znv": "0.5.0",
     "zod": "3.24.3"
   },
   "devDependencies": {
-    "@eslint/js": "9.24.0",
+    "@eslint/js": "9.25.1",
     "@modelcontextprotocol/inspector": "0.10.2",
-    "@types/bun": "^1.2.10",
-    "@types/node": "22.14.0",
+    "@types/bun": "1.2.10",
+    "@types/node": "22.15.2",
     "eslint": "9.24.0",
     "lefthook": "1.11.9",
+    "pino-pretty": "13.0.0",
     "typescript": "5.8.3",
-    "typescript-eslint": "8.29.1"
+    "typescript-eslint": "8.31.0"
   }
 }

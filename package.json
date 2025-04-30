@@ -16,7 +16,9 @@
   "description": "Coupler.io MCP server",
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.10.2",
+    "lodash": "4.17.21",
     "pino": "9.6.0",
+    "url-template": "3.1.1",
     "znv": "0.5.0",
     "zod": "3.24.3"
   },
@@ -24,6 +26,7 @@
     "@eslint/js": "9.25.1",
     "@modelcontextprotocol/inspector": "0.10.2",
     "@types/bun": "1.2.10",
+    "@types/lodash": "4.17.16",
     "@types/node": "22.15.2",
     "eslint": "9.24.0",
     "lefthook": "1.11.9",

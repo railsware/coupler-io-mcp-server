@@ -1,6 +1,7 @@
 import pino from 'pino'
 import { NODE_ENV, LOG_STDIO, LOG_LEVEL } from '@/env'
 
+// "Spy" on STDIO and log to a file
 ;(() => {
   if (!LOG_STDIO) return
 

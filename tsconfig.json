@@ -10,6 +10,7 @@
       "@/server": ["./src/server"],
       "@/lib/*": ["./src/lib/*"],
       "@/env": ["./src/env"],
+      "@/util/*": ["./src/util/*"],
       "@/logger": ["./src/logger"],
     },
 

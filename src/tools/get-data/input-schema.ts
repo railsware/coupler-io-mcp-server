@@ -3,12 +3,12 @@ export const inputSchema = {
   properties: {
     dataflowId: {
       type: 'string',
-      description: 'The ID of the dataflow with a successful run',
+      description: 'The ID of the data flow with a successful run',
       pattern: '^\\S+'
     },
     query: {
       type: 'string',
-      description: 'The SQL query to run on the dataflow database',
+      description: 'The SQL query to run on the data flow sqlite file',
       pattern: '^SELECT.*?'
     }
   },

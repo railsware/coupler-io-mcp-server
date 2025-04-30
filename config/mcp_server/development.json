@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "coupler_docker": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--env-file",
+        ".env",
+        "--add-host",
+        "api.lvh.me=host-gateway",
+        "--add-host",
+        "storage.test=host-gateway",
+        "coupler_mcp"
+      ]
+    },
+    "coupler_bun": {
+      "command": "bun",
+      "args": [
+        "--watch",
+        "src/index.ts"
+      ]
+    }
+  }
+}

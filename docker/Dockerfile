@@ -2,7 +2,7 @@ FROM oven/bun:1.2.10-slim AS base
 
 ARG NODE_ENV=production
 ARG COUPLER_API_HOST=https://api.coupler.io
-ARG LOG_LEVEL=info
+ARG LOG_LEVEL=silent
 
 ENV NODE_ENV=$NODE_ENV
 ENV COUPLER_API_HOST=$COUPLER_API_HOST

@@ -26,6 +26,11 @@ Install Git hooks:
 lefthook install
 ```
 
+Set environment variables:
+```shell
+cp .env.example .env
+```
+
 Run the MCP server:
 ```shell
 bun start
@@ -49,7 +54,6 @@ You can also optionally capture STDIO messages in the log file by setting `LOG_S
 docker build \
   --build-arg NODE_ENV=development \
   --build-arg COUPLER_API_HOST=http://api.lvh.me:3000 \
-  --build-arg STORAGE_HOST=http://storage.test:4443 \
    -t coupler_mcp -f docker/Dockerfile .
 
 docker run --rm -i coupler_mcp

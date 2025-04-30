@@ -21,6 +21,9 @@ FROM base AS final
 COPY --from=install /temp/install/node_modules node_modules
 COPY . .
 
+# Ensure log directory exists with correct permissions
+RUN mkdir -p /app/log && chown -R bun:bun /app/log && chmod 644 /app/log
+
 USER bun
 
 CMD ["bun", "start"]

@@ -15,6 +15,7 @@
   "description": "Coupler.io MCP server",
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.11.0",
+    "pino": "9.6.0",
     "znv": "0.5.0",
     "zod": "3.24.3"
   },
@@ -25,6 +26,7 @@
     "@types/node": "22.15.2",
     "eslint": "9.24.0",
     "lefthook": "1.11.9",
+    "pino-pretty": "13.0.0",
     "typescript": "5.8.3",
     "typescript-eslint": "8.31.0"
   }

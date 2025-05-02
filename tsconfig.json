@@ -9,6 +9,7 @@
       "@/tools/*": ["./src/tools/*"],
       "@/server": ["./src/server"],
       "@/env": ["./src/env"],
+      "@/logger": ["./src/logger"],
     },
 
     // Bundler mode

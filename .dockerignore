@@ -4,7 +4,6 @@
 dist
 node_modules
 
-logs
 *.log
 npm-debug.log*
 
@@ -22,6 +21,7 @@ pids
 
 Dockerfile*
 .dockerignore
+docker
 
 README.md
 .vscode

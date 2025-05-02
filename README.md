@@ -26,6 +26,11 @@ Install Git hooks:
 lefthook install
 ```
 
+Set environment variables:
+```shell
+cp .env.example .env
+```
+
 Run the MCP server:
 ```shell
 bun start

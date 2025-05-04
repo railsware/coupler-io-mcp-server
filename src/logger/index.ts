@@ -31,6 +31,6 @@ export const logger = pino({
   level: LOG_LEVEL || 'info',
   transport: {
     target: 'pino/file',
-    options: { destination: fileDestination },
+    options: { destination: fileDestination, mkdir: true },
   },
 })

@@ -10,6 +10,8 @@ RUN bun install --frozen-lockfile --production
 FROM base AS final
 COPY --from=install /temp/install/node_modules node_modules
 COPY . .
+# We can write logs to this dir
+RUN chown -R bun:bun /app/log
 
 USER bun
 

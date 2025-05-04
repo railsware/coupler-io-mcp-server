@@ -13,14 +13,6 @@ export const {
     LOG_STDIO: z.boolean().default(false),
     LOG_LEVEL: z.enum(LOG_LEVELS).default('info'),
     NODE_ENV: z.enum(ENVS).default('development'),
-<<<<<<< Updated upstream
-    COUPLER_API_HOST: z.string().url().default('https://api.coupler.io'),
-    COUPLER_ACCESS_TOKEN: z.string()
-||||||| Stash base
-    COUPLER_API_HOST: z.string().url().default('https://api.coupler.io'),
-    COUPLER_ACCESS_TOKEN: z.string().trim().min(1)
-=======
     COUPLER_API_HOST: z.string().url().default('https://app.coupler.io'),
     COUPLER_ACCESS_TOKEN: z.string().trim().min(1)
->>>>>>> Stashed changes
   })

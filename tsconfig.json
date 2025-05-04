@@ -8,8 +8,10 @@
     "paths": {
       "@/tools/*": ["./src/tools/*"],
       "@/server": ["./src/server"],
+      "@/lib/*": ["./src/lib/*"],
       "@/env": ["./src/env"],
-      "@/logger": ["./src/logger"],
+      "@/util/*": ["./src/util/*"],
+      "@/logger": ["./src/logger"]
     },
 
     // Bundler mode

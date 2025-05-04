@@ -26,3 +26,5 @@ docker
 README.md
 .vscode
 .editorconfig
+
+config/mcp-inspector

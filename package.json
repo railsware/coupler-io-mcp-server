@@ -6,7 +6,8 @@
   "homepage": "https://coupler.io",
   "scripts": {
     "start": "bun src/index.ts",
-    "inspect": "bun mcp-inspector bun src/index.ts",
+    "inspect:bun": "bun mcp-inspector --config config/mcp-inspector/development.json --server coupler_bun",
+    "inspect:docker": "bun mcp-inspector --config config/mcp-inspector/development.json --server coupler_docker",
     "lint": "eslint src/ --ext .ts"
   },
   "description": "Coupler.io MCP server",

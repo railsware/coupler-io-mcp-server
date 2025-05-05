@@ -1,3 +1,5 @@
+[![test](https://github.com/railsware/coupler-io-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/railsware/coupler-io-mcp-server/actions/workflows/ci.yml)
+
 # Coupler.io official MCP server
 
 ## Use Cases

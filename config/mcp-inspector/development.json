@@ -7,7 +7,7 @@
         "-i",
         "--rm",
         "--env-file",
-        ".env",
+        ".env.local",
         "--add-host",
         "storage.test=host-gateway",
         "coupler_mcp"

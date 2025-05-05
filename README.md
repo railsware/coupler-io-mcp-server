@@ -28,31 +28,44 @@ lefthook install
 
 Set environment variables:
 ```shell
-cp .env.example .env
+cp .env.example .env.local
 ```
 
+### Work with a raw server
 Run the MCP server:
 ```shell
 bun start
 ```
 
-### Run [MCP server inspector](https://github.com/modelcontextprotocol/inspector) for debugging
+#### Run [MCP server inspector](https://github.com/modelcontextprotocol/inspector) for debugging
 Caveat: make sure to keep only a single inspector tab open at all times, until [this inspector bug](https://github.com/modelcontextprotocol/inspector/issues/302) is fixed.
 ```shell
 # Run this and follow the instructions to view the inspector
-bun inspect
+bun inspect:bun
 ```
 
-### Containerize and run with Docker
+#### Tail logs
+Our local MCP server uses STDIO transport, therefore logs must go to a file. This may come in handy when debugging.
 ```shell
-docker build -t coupler_mcp -f docker/Dockerfile .
-docker run --rm -i coupler_mcp
+tail -f log/development.log | bun pino-pretty
+```
+You can also optionally capture STDIO messages in the log file by setting `LOG_STDIO=1` when running the server.
+If you're debugging a containerized server, you'd likely want to mount a dir at `/app/log` to be able to access the logs it generates.
+
+### Work with a containerized server
+Build a dev Docker image:
+```shell
+bin/build_image
 ```
 
-### Run within Claude Desktop
+#### Run MCP inspector
+```shell
+bun inspect:docker
+```
 
-- navigate to Settings > Developer > Edit Config
-- edit your `claude_desktop_config.json`, add entry for our server, e.g.:
+#### Run container within Claude Desktop
+Navigate to Settings > Developer > Edit Config.
+Edit your `claude_desktop_config.json`, add an entry for our server:
 ```json
 {
   "mcpServers": {
@@ -60,10 +73,17 @@ docker run --rm -i coupler_mcp
       "command": "docker",
       "args": [
         "run",
+        "-e",
+        "COUPLER_ACCESS_TOKEN",
+        "--add-host",
+        "storage.test=host-gateway",
         "--rm",
         "-i",
         "coupler_mcp"
-      ]
+      ],
+      "env": {
+        "COUPLER_ACCESS_TOKEN": "<your_token>"
+      }
     }
   }
 }

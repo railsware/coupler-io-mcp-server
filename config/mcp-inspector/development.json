@@ -10,6 +10,8 @@
         ".env.local",
         "--add-host",
         "storage.test=host-gateway",
+        "--add-host",
+        "lvh.me=host-gateway",
         "coupler_mcp"
       ]
     },

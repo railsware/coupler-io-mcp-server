@@ -31,7 +31,6 @@ jobs:
         key: ${{ runner.os }}-${{ steps.setup-bun.outputs.bun-version }}-node_modules-${{ hashFiles('bun.lock') }}
 
     - name: Install dependencies
-      if: steps.bun-cache.outputs.cache-hit != 'true'
       run: |
         bun install --frozen-lockfile
 

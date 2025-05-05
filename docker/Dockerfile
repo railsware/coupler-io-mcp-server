@@ -1,4 +1,4 @@
-FROM oven/bun:1.2.11-slim AS base
+FROM oven/bun:1.2.12-slim AS base
 
 ARG NODE_ENV=production
 

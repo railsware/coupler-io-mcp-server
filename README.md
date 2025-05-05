@@ -1,10 +1,35 @@
 # Coupler.io official MCP server
 
 ## Use Cases
+- Extracting and analyzing data from Coupler.io data flows.
 
 ## Prerequisites
+1. Install [Docker](https://www.docker.com/) to run the server in a container.
+2. Make sure Docker is running.
+3. Get a [Coupler.io Personal Access Token](https://app.coupler.io/app/ai_features)
 
-## Setup
+## Running the server
+### Claude Desktop
+```json
+{
+  "mcpServers": {
+    "coupler": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-e",
+        "COUPLER_ACCESS_TOKEN",
+        "--rm",
+        "-i",
+        "coupler_mcp:latest"
+      ],
+      "env": {
+        "COUPLER_ACCESS_TOKEN": "<your_token>"
+      }
+    }
+  }
+}
+```
 
 ## Development
 
@@ -77,6 +102,8 @@ Edit your `claude_desktop_config.json`, add an entry for our server:
         "COUPLER_ACCESS_TOKEN",
         "--add-host",
         "storage.test=host-gateway",
+        "--add-host",
+        "lvh.me=host-gateway",
         "--rm",
         "-i",
         "coupler_mcp"

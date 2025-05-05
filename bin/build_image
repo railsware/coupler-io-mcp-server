@@ -20,6 +20,16 @@ build_development() {
     .
 }
 
+build_staging() {
+  echo "Building staging image..."
+
+  docker build \
+    --build-arg NODE_ENV=staging \
+    -t coupler_mcp_staging:latest \
+    -f docker/Dockerfile \
+    .
+}
+
 build_production() {
   echo "Building production image..."
 
@@ -38,9 +48,12 @@ case "$ENVIRONMENT" in
   production)
     build_production
     ;;
+  staging)
+    build_staging
+    ;;
   *)
     echo "Error: Unknown environment '$ENVIRONMENT'" >&2
-    echo "Supported environments: development, production" >&2
+    echo "Supported environments: development, staging, production" >&2
     exit 1
     ;;
 esac

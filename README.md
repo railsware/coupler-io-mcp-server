@@ -1,6 +1,7 @@
 [![test](https://github.com/railsware/coupler-io-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/railsware/coupler-io-mcp-server/actions/workflows/ci.yml)
 
 # Coupler.io official MCP server
+The Coupler.io MCP Server is a Model Context Protocol (MCP) server that provides seamless integration with Coupler.io APIs.
 
 ## Use Cases
 - Extracting and analyzing data from Coupler.io data flows.
@@ -32,6 +33,15 @@
   }
 }
 ```
+
+## Tools
+### Data flows
+- **get-data** - Gets the result of a data flow run as a SQLite file and executes a read-only query on it.
+  - `dataflowId`: Data flow ID (`string`, **required**)
+  - `query`: Query to run on the data flow SQLite file (`string`, **required**)
+
+- **get-schema** - Gets the data flow schema file.
+  - `dataflowId`: Data flow ID (`string`, **required**)
 
 ## Development
 

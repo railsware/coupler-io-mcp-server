@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ENVIRONMENT="${1:-development}"
+
+if [ -z "$ENVIRONMENT" ]; then
+  echo "Error: Environment argument is required" >&2
+  echo "Usage: $(basename "$0") <environment>" >&2
+  exit 1
+fi
+
+build_development() {
+  echo "Building development image..."
+
+  docker build \
+    --build-arg NODE_ENV=development \
+    -t coupler_mcp \
+    -f docker/Dockerfile \
+    .
+}
+
+case "$ENVIRONMENT" in
+  development)
+    build_development
+    ;;
+  *)
+    echo "Error: Unknown environment '$ENVIRONMENT'" >&2
+    echo "Supported environments: development" >&2
+    exit 1
+    ;;
+esac

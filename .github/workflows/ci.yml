@@ -1,0 +1,43 @@
+name: 'Lint & Test'
+
+on: push
+
+env:
+  NODE_ENV: test
+
+jobs:
+  ci:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Checkout code
+      # actions/checkout@v4.2.2
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+    - name: Set up Bun
+      # oven-sh/setup-bun@v2.0.2
+      uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76
+      id: setup-bun
+      with:
+        bun-version-file: .tool-versions
+
+    - name: Save & restore bun install and node_modules cache
+      # actions/cache@v4.2.3
+      uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
+      id: bun-cache
+      with:
+        path: |
+          ~/.bun/install/cache
+          node_modules
+        key: ${{ runner.os }}-${{ steps.setup-bun.outputs.bun-version }}-node_modules-${{ hashFiles('bun.lock') }}
+
+    - name: Install dependencies
+      run: |
+        bun install --frozen-lockfile
+
+    - name: Lint code
+      run: |
+        bun lint
+
+    - name: Run tests
+      run: |
+        bun test

@@ -4,7 +4,6 @@
 dist
 node_modules
 
-logs
 *.log
 npm-debug.log*
 
@@ -18,10 +17,14 @@ pids
 .env.test.local
 .env.production.local
 .env.local
+.env.example
 
 Dockerfile*
 .dockerignore
+docker
 
 README.md
 .vscode
 .editorconfig
+
+config/mcp-inspector

@@ -3,9 +3,11 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprot
 
 // Import all tools here
 import * as getData from '@/tools/get-data'
+import * as getSchema from '@/tools/get-schema'
 
 const TOOL_MAP = {
-  [getData.name]: getData.toolMapEntry
+  [getData.name]: getData.toolMapEntry,
+  [getSchema.name]: getSchema.toolMapEntry,
 }
 
 export const server = new Server({
@@ -14,6 +16,7 @@ export const server = new Server({
 }, {
   capabilities: {
     tools: {},
+    logging: {}
   }
 })
 
@@ -32,7 +35,8 @@ server.setRequestHandler(
   ListToolsRequestSchema,
   async () => ({
     tools: [
-      getData.toolListEntry
+      getData.toolListEntry,
+      getSchema.toolListEntry,
     ]
   })
 )

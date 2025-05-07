@@ -4,7 +4,7 @@
 dist
 node_modules
 
-*.log
+log/*.log
 npm-debug.log*
 
 pids

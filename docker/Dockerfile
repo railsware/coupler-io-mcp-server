@@ -1,6 +1,6 @@
 FROM oven/bun:1.2.12-slim AS base
 
-ARG NODE_ENV=production
+ARG NODE_ENV=development
 
 ENV NODE_ENV=$NODE_ENV
 
@@ -17,6 +17,8 @@ COPY . .
 # We may write logs to this dir
 RUN chown -R bun:bun /app/log
 
+RUN chmod +x /app/docker/entrypoint.sh
+
 USER bun
 
-CMD ["bun", "start"]
+ENTRYPOINT ["/app/docker/entrypoint.sh"]

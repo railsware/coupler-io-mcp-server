@@ -22,6 +22,7 @@ pids
 Dockerfile*
 .dockerignore
 docker
+!docker/entrypoint.sh
 
 README.md
 .vscode

@@ -11,11 +11,11 @@ if [ -z "$ENVIRONMENT" ]; then
 fi
 
 build_development() {
-  echo "Building development image..."
+  echo "Building development image: coupler-io-mcp-server-development"
 
   docker build \
     --build-arg NODE_ENV=development \
-    -t coupler_mcp \
+    -t coupler-io-mcp-server-development \
     -f docker/Dockerfile \
     .
 }

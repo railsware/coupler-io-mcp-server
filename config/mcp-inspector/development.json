@@ -12,7 +12,7 @@
         "storage.test=host-gateway",
         "--add-host",
         "lvh.me=host-gateway",
-        "coupler_mcp"
+        "coupler-io-mcp-server-development"
       ]
     },
     "coupler_bun": {

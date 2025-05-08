@@ -167,3 +167,4 @@ Edit your `claude_desktop_config.json`, add an entry for the staging server:
 ```
 
 ## License
+This project is licensed under the terms of the MIT open source license. Please refer to MIT for the full terms.

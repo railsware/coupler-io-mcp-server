@@ -2,6 +2,7 @@
   "name": "coupler-io-mcp-server",
   "version": "0.0.1",
   "main": "index.js",
+  "license": "MIT",
   "type": "module",
   "homepage": "https://coupler.io",
   "scripts": {

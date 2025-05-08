@@ -1,4 +1,4 @@
-[![test](https://github.com/railsware/coupler-io-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/railsware/coupler-io-mcp-server/actions/workflows/ci.yml)
+[![Lint & Test](https://github.com/railsware/coupler-io-mcp-server/actions/workflows/lint-and-test.yml/badge.svg)](https://github.com/railsware/coupler-io-mcp-server/actions/workflows/lint-and-test.yml)
 
 # Coupler.io official MCP server
 The Coupler.io MCP Server is a Model Context Protocol (MCP) server that provides seamless integration with Coupler.io APIs.

@@ -1,1 +1,4 @@
 telemetry = false
+
+[run]
+silent = true

@@ -177,5 +177,28 @@ Enable logging by adding the following args:
         "LOG_STDIO=1",
 ```
 
+### Building and pushing a release image
+The development cycle looks like this:
+- open a PR with changes
+- use the `pr-N`-tagged image to debug and test your changes
+- merge the PR to `main`
+- test the `edge` image
+- build and push a release image tagged as `latest`
+
+To build and push a release image:
+- draft a [new release](https://github.com/railsware/coupler-io-mcp-server/releases/new?target=main)
+- specify a new tag to be created on publish. Use [semver](https://semver.org/)
+- Target: `main` branch
+- Generate or write release notes
+- click "Publish release"
+- check [the docker image workflow](https://github.com/railsware/coupler-io-mcp-server/actions/workflows/publish-docker-image.yml) progress
+
+You should now be able to smoke-test the release image.
+```shell
+# Pull the `latest` image
+docker pull ghcr.io/railsware/coupler-io-mcp-server
+```
+Run the release image with Claude Desktop and other supported clients.
+
 ## License
 This project is licensed under the terms of the MIT open source license. Please refer to [MIT](./LICENSE) for the full terms.

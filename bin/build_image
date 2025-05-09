@@ -14,7 +14,6 @@ build_development() {
   echo "Building development image: coupler-io-mcp-server-development"
 
   docker build \
-    --build-arg NODE_ENV=development \
     -t coupler-io-mcp-server-development \
     -f docker/Dockerfile \
     .

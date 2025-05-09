@@ -1,8 +1,8 @@
 FROM oven/bun:1.2.12-slim AS base
 
-ARG NODE_ENV=development
-
-ENV NODE_ENV=$NODE_ENV
+ENV NODE_ENV=production
+ENV COUPLER_API_HOST=https://app.coupler.io/mcp
+ENV LOG_LEVEL=silent
 
 WORKDIR /app
 
@@ -17,8 +17,6 @@ COPY . .
 # We may write logs to this dir
 RUN chown -R bun:bun /app/log
 
-RUN chmod +x /app/docker/entrypoint.sh
-
 USER bun
 
-ENTRYPOINT ["/app/docker/entrypoint.sh"]
+CMD ["bun", "start"]

@@ -1,7 +1,7 @@
 import { parseEnv, z } from 'znv'
 
 const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error', 'fatal', 'silent'] as const
-const ENVS = ['development', 'test', 'staging', 'production'] as const
+const ENVS = ['development', 'test', 'production'] as const
 
 export const {
   NODE_ENV,

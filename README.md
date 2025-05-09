@@ -154,6 +154,8 @@ Edit your `claude_desktop_config.json`, add an entry for the staging server:
         "run",
         "-e",
         "COUPLER_ACCESS_TOKEN",
+        "--env",
+        "COUPLER_API_HOST=https://app.couplerstaging.dev/mcp",
         "--rm",
         "-i",
         "ghcr.io/railsware/coupler-io-mcp-server-staging"
@@ -164,6 +166,14 @@ Edit your `claude_desktop_config.json`, add an entry for the staging server:
     }
   }
 }
+```
+
+Enable logging by adding the following args:
+```json
+        "--env",
+        "LOG_LEVEL=debug",
+        "--env",
+        "LOG_STDIO=1",
 ```
 
 ## License

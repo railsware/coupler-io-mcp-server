@@ -1,4 +1,4 @@
-name: Publish staging image
+name: Publish docker image
 
 on:
   push:
@@ -8,7 +8,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  NODE_ENV: staging
 
 jobs:
   build-and-push-image:
@@ -39,10 +38,12 @@ jobs:
         id: meta
         uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-staging # railsware/coupler-io-mcp-server-staging
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} # railsware/coupler-io-mcp-server
           tags: |
             type=sha
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=edge,branch=main
+            type=ref,event=pr
+            type=semver,pattern={{version}}
 
       - name: Build and push Docker image
         id: push
@@ -50,8 +51,6 @@ jobs:
         with:
           context: .
           file: docker/Dockerfile
-          build-args: |
-            NODE_ENV=${{ env.NODE_ENV }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

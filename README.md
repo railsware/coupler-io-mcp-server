@@ -89,7 +89,7 @@ tail -f log/development.log | bun pino-pretty
 You can also optionally capture STDIO messages in the log file by setting `LOG_STDIO=1` when running the server.
 If you're debugging a containerized server, you'd likely want to mount a dir at `/app/log` to be able to access the logs it generates.
 
-### Working with development docker image
+### Working with development Docker image
 Build Docker image for development:
 ```shell
 bin/build_image
@@ -128,11 +128,10 @@ Edit your `claude_desktop_config.json`, add an entry for our server:
 }
 ```
 
-### Working with the staging image
-We build and publish the staging docker image of our MCP server `on: push` to the `main` branch.
-The staging image is configured to work with https://app.couplerstaging.dev.
+### Testing the Docker image against Coupler.io staging
+We build and publish a Docker image with of our MCP server, tagged `edge`, on every push to the `main` branch.
 
-The staging image is currently private,
+The image is currently private,
 you have to [authenticate to Github Container Registry (GHCR)](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry) in order to access it.
 - [Create a personal access token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) with at least `read:packages` scope
 - Once you have the token, make sure to store it securely in your password manager
@@ -141,8 +140,12 @@ you have to [authenticate to Github Container Registry (GHCR)](https://docs.gith
 export CR_PAT=YOUR_TOKEN
 echo $CR_PAT | docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin
 ```
+- check that you authenticated successfully by pulling our image:
+```shell
+docker pull ghcr.io/railsware/coupler-io-mcp-server:edge
+```
 
-You can now configure Claude Desktop to run the staging image.
+You can now configure Claude Desktop to run the Docker container against Coupler.io staging.
 Navigate to Settings > Developer > Edit Config.
 Edit your `claude_desktop_config.json`, add an entry for the staging server:
 ```json
@@ -158,7 +161,7 @@ Edit your `claude_desktop_config.json`, add an entry for the staging server:
         "COUPLER_API_HOST=https://app.couplerstaging.dev/mcp",
         "--rm",
         "-i",
-        "ghcr.io/railsware/coupler-io-mcp-server-staging"
+        "ghcr.io/railsware/coupler-io-mcp-server:edge"
       ],
       "env": {
         "COUPLER_ACCESS_TOKEN": "<your_coupler_access_token_from_staging>"

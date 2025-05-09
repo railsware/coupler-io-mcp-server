@@ -4,3 +4,8 @@ pre-commit:
     eslint:
       glob: '*.{ts,tsx,js,jsx}'
       run: bun eslint {staged_files} --ext .ts,.tsx
+
+prepare-commit-msg:
+  scripts:
+    'prepare-commit-msg.sh':
+      runner: bash

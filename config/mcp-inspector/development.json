@@ -18,8 +18,7 @@
     "coupler_bun": {
       "command": "bun",
       "args": [
-        "--watch",
-        "src/index.ts"
+        "dev"
       ]
     }
   }

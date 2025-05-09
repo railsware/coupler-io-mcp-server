@@ -100,7 +100,8 @@ You can now run the container with the MCP inspector for debugging:
 bun inspect:docker
 ```
 
-Or run the container within Claude Desktop.
+Or run the container within Claude Desktop, configured with your `.env.local` file in the project.
+Grab the absolute path to your env file `realpath .env.local`.
 Navigate to Settings > Developer > Edit Config.
 Edit your `claude_desktop_config.json`, add an entry for our server:
 ```json
@@ -110,8 +111,8 @@ Edit your `claude_desktop_config.json`, add an entry for our server:
       "command": "docker",
       "args": [
         "run",
-        "-e",
-        "COUPLER_ACCESS_TOKEN",
+        "--env-file",
+        "/path/to/your/.env.local",
         "--add-host",
         "storage.test=host-gateway",
         "--add-host",
@@ -119,10 +120,7 @@ Edit your `claude_desktop_config.json`, add an entry for our server:
         "--rm",
         "-i",
         "coupler-io-mcp-server-development"
-      ],
-      "env": {
-        "COUPLER_ACCESS_TOKEN": "<your_coupler_token_from_the_local_instance>"
-      }
+      ]
     }
   }
 }

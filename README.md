@@ -129,21 +129,7 @@ Edit your `claude_desktop_config.json`, add an entry for our server:
 ### Testing the Docker image against Coupler.io staging
 We build and publish a Docker image with of our MCP server, tagged `edge`, on every push to the `main` branch.
 
-The image is currently private,
-you have to [authenticate to Github Container Registry (GHCR)](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry) in order to access it.
-- [Create a personal access token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) with at least `read:packages` scope
-- Once you have the token, make sure to store it securely in your password manager
-- sign in to GHCR with the `docker` CLI
-```shell
-export CR_PAT=YOUR_TOKEN
-echo $CR_PAT | docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin
-```
-- check that you authenticated successfully by pulling our image:
-```shell
-docker pull ghcr.io/railsware/coupler-io-mcp-server:edge
-```
-
-You can now configure Claude Desktop to run the Docker container against Coupler.io staging.
+Configure Claude Desktop to run the Docker container against Coupler.io staging.
 Navigate to Settings > Developer > Edit Config.
 Edit your `claude_desktop_config.json`, add an entry for the staging server:
 ```json
@@ -169,7 +155,7 @@ Edit your `claude_desktop_config.json`, add an entry for the staging server:
 }
 ```
 
-Enable logging by adding the following args:
+[Optional] Enable logging for debugging by adding the following args:
 ```json
         "--env",
         "LOG_LEVEL=debug",

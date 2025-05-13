@@ -1,8 +1,9 @@
 import { parseTemplate } from 'url-template'
 import type { Template } from 'url-template'
-import { COUPLER_API_HOST } from '@/env'
-import { logger } from '@/logger'
 import { omit } from 'lodash'
+
+import { COUPLER_API_HOST, APP_VERSION } from '@/env'
+import { logger } from '@/logger'
 
 type OptionsType = {
   request: RequestInit,
@@ -12,6 +13,7 @@ type OptionsType = {
 const DEFAULT_HEADERS = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
+  'X-Coupler-Client': `CouplerMCP/${APP_VERSION}`,
 }
 
 export class CouplerioClient {

@@ -19,4 +19,4 @@ RUN chown -R bun:bun /app/log
 
 USER bun
 
-CMD ["bun", "start"]
+ENTRYPOINT ["bun", "start"]

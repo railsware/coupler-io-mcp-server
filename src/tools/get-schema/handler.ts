@@ -1,6 +1,6 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 
-import { logger } from '@/logger'
+// import { logger } from '@/logger'
 import { textResponse } from '@/util/tool-response'
 
 import { validateParams } from './validate-params'
@@ -33,7 +33,7 @@ export const handler = async (params?: Record<string, unknown>): Promise<CallToo
   try {
     schemaPath = await fileManager.getFile('schema')
   } catch (e) {
-    logger.error(`Failed to get dataflow schema file: ${e}`)
+    // logger.error(`Failed to get dataflow schema file: ${e}`)
     return textResponse({ text: `Failed to get dataflow ${dataflowId} schema file. ${e}`, isError: true })
   }
 

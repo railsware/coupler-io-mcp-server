@@ -2,7 +2,7 @@ import { parseTemplate } from 'url-template'
 import type { Template } from 'url-template'
 import { omit } from 'lodash'
 import { COUPLER_API_HOST } from '@/env'
-import { logger } from '@/logger'
+// import { logger } from '@/logger'
 
 type OptionsType = {
   request: RequestInit,
@@ -47,7 +47,7 @@ export class CouplerioClient {
       ...requestOptions,
     })
 
-    logger.debug(`Request URL: ${url}`)
+    // logger.debug(`Request URL: ${url}`)
 
     return await fetch(request)
   }

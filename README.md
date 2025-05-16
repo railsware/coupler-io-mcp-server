@@ -20,6 +20,7 @@ The Coupler.io MCP Server is a Model Context Protocol (MCP) server that provides
       "command": "docker",
       "args": [
         "run",
+        "--pull=always",
         "-e",
         "COUPLER_ACCESS_TOKEN",
         "--rm",
@@ -33,6 +34,9 @@ The Coupler.io MCP Server is a Model Context Protocol (MCP) server that provides
   }
 }
 ```
+
+NOTE: `"--pull=always"` will ensure you always have the latest image by pulling it from the registry.
+Remove this line, if you're offline or if you specifically want to use the image you've already pulled previously.
 
 ## Tools
 ### Data flows
@@ -69,7 +73,7 @@ cp .env.example .env.local
 ### Work with a raw server
 Run the MCP server:
 ```shell
-npm run start
+npm run dev
 ```
 
 #### Run [MCP server inspector](https://github.com/modelcontextprotocol/inspector) for debugging

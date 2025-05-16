@@ -15,9 +15,10 @@
         "coupler-io-mcp-server-development"
       ]
     },
-    "coupler_bun": {
-      "command": "bun",
+    "coupler_node": {
+      "command": "npm",
       "args": [
+        "run",
         "dev"
       ]
     }

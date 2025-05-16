@@ -12,29 +12,34 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-    - name: Set up Bun
-      uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76 # v2.0.2
-      id: setup-bun
+    - name: Set up Node
+      uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      id: setup-node
       with:
-        bun-version-file: .tool-versions
+        node-version-file: .tool-versions
 
-    - name: Save & restore bun install and node_modules cache
-      uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
-      id: bun-cache
+    - name: Get npm cache directory
+      id: npm-cache-dir
+      shell: bash
+      run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+
+    - name: Save & restore node cache
+      uses: actions/cache@v4
+      id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
       with:
-        path: |
-          ~/.bun/install/cache
-          node_modules
-        key: ${{ runner.os }}-${{ steps.setup-bun.outputs.bun-version }}-node_modules-${{ hashFiles('bun.lock') }}
+        path: ${{ steps.npm-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
 
     - name: Install dependencies
       run: |
-        bun install --frozen-lockfile
+        npm ci
 
     - name: Lint code
       run: |
-        bun lint
+        npm run lint
 
     - name: Run tests
       run: |
-        bun test
+        npm run test

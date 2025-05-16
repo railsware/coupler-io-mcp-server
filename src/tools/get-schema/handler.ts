@@ -1,4 +1,5 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
+import { readFileSync } from 'fs'
 
 import { logger } from '@/logger'
 import { textResponse } from '@/util/tool-response'
@@ -37,7 +38,7 @@ export const handler = async (params?: Record<string, unknown>): Promise<CallToo
     return textResponse({ text: `Failed to get dataflow ${dataflowId} schema file. ${e}`, isError: true })
   }
 
-  const schema = await Bun.file(schemaPath).json()
+  const schema = JSON.parse(readFileSync(schemaPath, 'utf-8'))
   schema.columns.forEach((col: ColumnDefinition, index: number) => {
     col.columnName = `col_${index}`
   })

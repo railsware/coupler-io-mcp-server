@@ -7,10 +7,6 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-# Bun
-package-lock.json
-.bun
-
 # Misc
 .DS_Store
 

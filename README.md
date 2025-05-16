@@ -20,6 +20,7 @@ The Coupler.io MCP Server is a Model Context Protocol (MCP) server that provides
       "command": "docker",
       "args": [
         "run",
+        "--pull=always",
         "-e",
         "COUPLER_ACCESS_TOKEN",
         "--rm",
@@ -34,6 +35,9 @@ The Coupler.io MCP Server is a Model Context Protocol (MCP) server that provides
 }
 ```
 
+NOTE: `"--pull=always"` will ensure you always have the latest image by pulling it from the registry.
+Remove this line, if you're offline or if you specifically want to use the image you've already pulled previously.
+
 ## Tools
 ### Data flows
 - **get-data** - Gets the result of a data flow run as a SQLite file and executes a read-only query on it.
@@ -45,17 +49,15 @@ The Coupler.io MCP Server is a Model Context Protocol (MCP) server that provides
 
 ## Development
 
-Install Bun and NodeJS:
+Install NodeJS:
 ```shell
-# Add Bun plugin
-asdf plugin add bun
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install
 ```
 
 Install dependencies:
 ```shell
-bun install
+npm install
 ```
 
 Install Git hooks:
@@ -71,20 +73,20 @@ cp .env.example .env.local
 ### Work with a raw server
 Run the MCP server:
 ```shell
-bun start
+npm run dev
 ```
 
 #### Run [MCP server inspector](https://github.com/modelcontextprotocol/inspector) for debugging
 Caveat: make sure to keep only a single inspector tab open at all times, until [this inspector bug](https://github.com/modelcontextprotocol/inspector/issues/302) is fixed.
 ```shell
 # Run this and follow the instructions to view the inspector
-bun inspect:bun
+npm run inspect:node
 ```
 
 #### Tail logs
 Our local MCP server uses STDIO transport, therefore logs must go to a file. This may come in handy when debugging.
 ```shell
-tail -f log/development.log | bun pino-pretty
+tail -f log/development.log | npx pino-pretty
 ```
 You can also optionally capture STDIO messages in the log file by setting `LOG_STDIO=1` when running the server.
 If you're debugging a containerized server, you'd likely want to mount a dir at `/app/log` to be able to access the logs it generates.
@@ -97,7 +99,7 @@ bin/build_image
 
 You can now run the container with the MCP inspector for debugging:
 ```shell
-bun inspect:docker
+npm run inspect:docker
 ```
 
 Or run the container within Claude Desktop, configured with your `.env.local` file in the project.

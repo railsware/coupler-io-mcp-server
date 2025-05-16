@@ -1,12 +1,11 @@
-import { afterAll, beforeEach, describe, expect, it, spyOn } from 'bun:test'
+import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { rm } from 'node:fs/promises'
 
 import { DOWNLOAD_DIR } from '@/tools/shared/file-manager'
 import { handler } from './handler'
 
 const createMockResponse = (responseFn: () => Promise<Response>): typeof fetch => {
-  // Bun extends fetch API with this preconnect function.
-  return Object.assign(responseFn, { preconnect: () => {} })
+  return responseFn
 }
 
 const mockSchema = {
@@ -32,7 +31,7 @@ const mockCreateSignedUrlError = createMockResponse(
   async () => new Response('Error creating signed URL', { status: 500 })
 )
 
-const mockFetch = spyOn(globalThis, 'fetch')
+const mockFetch = vi.spyOn(globalThis, 'fetch')
 
 describe('getSchema', () => {
   beforeEach(async () => {

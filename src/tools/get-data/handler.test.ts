@@ -1,21 +1,19 @@
-import { afterAll, beforeEach, describe, expect, it, spyOn } from 'bun:test'
+import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { rm } from 'node:fs/promises'
-import { Database } from 'bun:sqlite'
+import Database from 'better-sqlite3'
 
 import { handler } from './handler'
 import { DOWNLOAD_DIR } from '../shared/file-manager'
 
-// Helper to create mock responses that match fetch's type signature
 const createMockResponse = (responseFn: () => Promise<Response>): typeof fetch => {
-  // Bun extends fetch API with this preconnect function.
-  return Object.assign(responseFn, { preconnect: () => {} })
+  return responseFn
 }
 
-const mockFetch = spyOn(global, 'fetch')
+const mockFetch = vi.spyOn(global, 'fetch')
 
 const db = new Database(':memory:')
-db.exec('CREATE TABLE data (col_0 BLOB, col_1 BLOB)')
-db.exec('INSERT INTO data (col_0, col_1) VALUES (1, "Test")')
+db.exec('CREATE TABLE data (col_0 BLOB, col_1 BLOB);')
+db.exec("INSERT INTO data (col_0, col_1) VALUES (1, 'Test');")
 // Serialize the db to a buffer
 const dbBuffer = db.serialize()
 db.close()

@@ -3,7 +3,7 @@ pre-commit:
   commands:
     eslint:
       glob: '*.{ts,tsx,js,jsx}'
-      run: bun eslint {staged_files} --ext .ts,.tsx
+      run: npx eslint {staged_files} --ext .ts,.tsx
 
 prepare-commit-msg:
   scripts:

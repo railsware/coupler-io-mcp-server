@@ -1,8 +1,8 @@
 import { parseTemplate } from 'url-template'
 import type { Template } from 'url-template'
-import { omit } from 'lodash'
 import { COUPLER_API_HOST } from '@/env'
 import { logger } from '@/logger'
+import { omit } from 'lodash'
 
 type OptionsType = {
   request: RequestInit,

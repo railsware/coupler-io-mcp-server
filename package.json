@@ -3,20 +3,22 @@
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
-  "type": "module",
   "homepage": "https://coupler.io",
   "scripts": {
-    "start": "bun src/index.ts",
-    "dev": "bun --watch src/index.ts",
-    "inspect:bun": "bun mcp-inspector --config config/mcp-inspector/development.json --server coupler_bun",
-    "inspect:docker": "bun mcp-inspector --config config/mcp-inspector/development.json --server coupler_docker",
-    "lint": "eslint src/ --ext .ts"
+    "start": "tsx src/index.ts",
+    "dev": "tsx --env-file=.env.local --watch src/index.ts",
+    "inspect:node": "npx mcp-inspector --config config/mcp-inspector/development.json --server coupler_node",
+    "inspect:docker": "npx mcp-inspector --config config/mcp-inspector/development.json --server coupler_docker",
+    "lint": "eslint src/ --ext .ts",
+    "test": "vitest run"
   },
   "description": "Coupler.io MCP server",
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.11.0",
+    "better-sqlite3": "11.10.0",
     "lodash": "4.17.21",
     "pino": "9.6.0",
+    "tsx": "4.19.4",
     "url-template": "3.1.1",
     "znv": "0.5.0",
     "zod": "3.24.4"
@@ -24,13 +26,15 @@
   "devDependencies": {
     "@eslint/js": "9.26.0",
     "@modelcontextprotocol/inspector": "0.11.0",
-    "@types/bun": "1.2.12",
+    "@types/better-sqlite3": "7.6.13",
     "@types/lodash": "4.17.16",
     "@types/node": "22.15.3",
     "eslint": "9.26.0",
     "lefthook": "1.11.12",
     "pino-pretty": "13.0.0",
     "typescript": "5.8.3",
-    "typescript-eslint": "8.32.0"
+    "typescript-eslint": "8.32.0",
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "3.1.3"
   }
 }

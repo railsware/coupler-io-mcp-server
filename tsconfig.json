@@ -3,7 +3,10 @@
     "rootDir": "./src",
     "target": "ESNext",
     "lib": ["ESNext"],
-    "module": "ESNext",
+    "module": "Preserve",
+    "moduleDetection": "force",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "allowJs": true,
     "paths": {
       "@/tools/*": ["./src/tools/*"],
@@ -13,11 +16,6 @@
       "@/util/*": ["./src/util/*"],
       "@/logger": ["./src/logger"]
     },
-
-    // Bundler mode
-    "moduleResolution": "bundler",
-    "verbatimModuleSyntax": true,
-    "noEmit": true,
 
     // Type checking
     "strict": true,

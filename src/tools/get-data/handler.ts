@@ -1,4 +1,4 @@
-import { Database } from 'bun:sqlite'
+import Database from 'better-sqlite3'
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 
 import { textResponse } from '@/util/tool-response'
@@ -29,13 +29,14 @@ export const handler = async (params?: Record<string, unknown>): Promise<CallToo
   }
 
   const db = new Database(sqlitePath)
-  let queryResult
+  let statement, queryResult
   try {
-    queryResult = db.query(query).all()
+    statement = db.prepare(query)
+    queryResult = statement.all()
   } catch (e) {
     return textResponse({ text: `Failed to execute query: ${e}`, isError: true })
   } finally {
-    db.close(false)
+    db.close()
   }
 
   return textResponse({ text: JSON.stringify(queryResult) })

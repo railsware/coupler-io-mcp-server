@@ -1,7 +1,6 @@
-import { mkdir } from 'node:fs/promises'
-
 import { COUPLER_ACCESS_TOKEN, NODE_ENV } from '@/env'
 import { CouplerioClient } from '@/lib/couplerio-client'
+import { existsSync, writeFileSync, mkdirSync } from 'node:fs'
 
 export const DOWNLOAD_DIR = `/tmp/coupler_mcp/${NODE_ENV}/dataflows`
 
@@ -16,8 +15,8 @@ export class FileManager {
     this.coupler = new Client({ auth: COUPLER_ACCESS_TOKEN })
   }
 
-  async initStorage() {
-    await mkdir(DOWNLOAD_DIR, { recursive: true })
+  initStorage() {
+    mkdirSync(`${DOWNLOAD_DIR}/${this.dataflowId}`, { recursive: true })
   }
 
   /**
@@ -26,9 +25,8 @@ export class FileManager {
    */
   async getFile(fileType: FileType): Promise<string> {
     const filePath = this.buildFilePath(fileType)
-    const fileExists = await Bun.file(filePath).exists()
 
-    if (fileExists) {
+    if (existsSync(filePath)) {
       return filePath
     }
 
@@ -50,7 +48,9 @@ export class FileManager {
       throw new Error(`Failed to download file. Response status: ${fileResponse.status}`)
     }
 
-    await Bun.write(filePath, fileResponse)
+    const data = Buffer.from(await fileResponse.arrayBuffer())
+
+    writeFileSync(filePath, data)
 
     return filePath
   }

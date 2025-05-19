@@ -16,6 +16,8 @@ const DEFAULT_HEADERS = {
   'X-Coupler-Client': `CouplerMCP/${APP_VERSION}`,
 }
 
+const DEFAULT_TIMEOUT = 15_000 // 15 seconds
+
 export class CouplerioClient {
   auth: string
   baseUrl: string
@@ -31,7 +33,7 @@ export class CouplerioClient {
     this.version = version
   }
 
-  async request(pathTemplateString: string, options: OptionsType): Promise<Response> {
+  async request(pathTemplateString: string, options: OptionsType = { request: { method: 'GET' }}): Promise<Response> {
     const template = parseTemplate(pathTemplateString)
     const expand = options.expand || {}
     const optionalHeaders = options.request?.headers || {}
@@ -41,6 +43,7 @@ export class CouplerioClient {
     const url = `${this.baseUrl}${path}`
 
     const request = new Request(url, {
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT),
       headers: {
         ...optionalHeaders,
         ...DEFAULT_HEADERS,

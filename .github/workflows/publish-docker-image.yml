@@ -65,6 +65,8 @@ jobs:
         with:
           context: .
           file: docker/Dockerfile
+          build-args: |
+            APP_VERSION=${{ github.sha }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

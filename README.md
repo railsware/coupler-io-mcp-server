@@ -97,7 +97,7 @@ Build Docker image for development:
 bin/build_image
 ```
 
-You can now run the container with the MCP inspector for debugging:
+You can now run the container with the MCP inspector for debugging in UI mode:
 ```shell
 npm run inspect:docker
 ```
@@ -126,6 +126,20 @@ Edit your `claude_desktop_config.json`, add an entry for our server:
     }
   }
 }
+```
+
+### Using MCP inspector
+[Use MCP inspector in CLI mode](https://github.com/modelcontextprotocol/inspector/blob/24e8861a88f843d57cdb637a5ae3afd0e528c5f3/README.md#cli-mode) for smoke testing the server with a short feedback loop:
+
+```shell
+# List tools
+npx @modelcontextprotocol/inspector --cli npm run dev --method tools/list
+
+# Call list-dataflows tool
+npx @modelcontextprotocol/inspector --cli npm run dev --method tools/call --tool-name list-dataflows
+
+# Call get-schema tool
+npx @modelcontextprotocol/inspector --cli npm run dev --method tools/call --tool-name get-schema --tool-arg dataflowId=<your data flow ID>
 ```
 
 ### Testing the Docker image against Coupler.io staging

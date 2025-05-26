@@ -3,6 +3,9 @@
 # Coupler.io official MCP server
 The Coupler.io MCP Server is a Model Context Protocol (MCP) server that provides seamless integration with Coupler.io APIs.
 
+**⚠️ Alpha Software Warning**  
+This repo contains early alpha software under active development. Features are incomplete and subject to breaking changes.
+
 ## Use Cases
 - Extracting and analyzing data from Coupler.io data flows.
 

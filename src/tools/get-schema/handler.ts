@@ -1,11 +1,13 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 import { readFileSync } from 'fs'
+import { fromError } from 'zod-validation-error'
 
 import { logger } from '@/logger'
 import { textResponse } from '@/util/tool-response'
 
-import { validateParams } from './validate-params'
 import { FileManager } from '@/tools/shared/file-manager'
+
+import { zodSchema } from './input-schema'
 
 type ColumnDefinition = {
   key: string,
@@ -16,18 +18,19 @@ type ColumnDefinition = {
 }
 
 export const handler = async (params?: Record<string, unknown>): Promise<CallToolResult> => {
-  try {
-    validateParams(params)
-  } catch (e) {
+  const validationResult = zodSchema.safeParse(params)
+
+  if (!validationResult.success) {
+    const error = fromError(validationResult.error)
+    logger.error(`Invalid parameters for get-schema tool: ${error.toString()}`)
+
     return textResponse({
-      text: (e as Error).message,
+      text: `Invalid parameters for get-schema tool. ${error.toString()}`,
       isError: true,
     })
   }
 
-  const dataflowId = params!.dataflowId as string
-
-  const fileManager = new FileManager({ dataflowId })
+  const fileManager = new FileManager(validationResult.data)
 
   let schemaPath: string
 
@@ -35,7 +38,7 @@ export const handler = async (params?: Record<string, unknown>): Promise<CallToo
     schemaPath = await fileManager.getFile('schema')
   } catch (e) {
     logger.error(`Failed to get dataflow schema file: ${e}`)
-    return textResponse({ text: `Failed to get dataflow ${dataflowId} schema file. ${e}`, isError: true })
+    return textResponse({ text: `Failed to get dataflow ${validationResult.data.dataflowId} schema file. ${e}`, isError: true })
   }
 
   const schema = JSON.parse(readFileSync(schemaPath, 'utf-8'))

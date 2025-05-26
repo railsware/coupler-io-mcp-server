@@ -48,7 +48,7 @@ describe('getSchema', () => {
       .mockImplementationOnce(mockCreateSignedUrl)
       .mockImplementationOnce(mockGetSchemaFile)
 
-    const toolResult = await handler({ dataflowId: 'test-dataflow-id' })
+    const toolResult = await handler({ dataflowId: 'test-dataflow-id', executionId: 'test-execution-id' })
 
     expect(toolResult).toEqual({
       isError: false,
@@ -70,7 +70,7 @@ describe('getSchema', () => {
         .mockImplementationOnce(mockCreateSignedUrlError)
         .mockImplementationOnce(mockGetSchemaFile)
 
-      const toolResult = await handler({ dataflowId: 'test-dataflow-id' })
+      const toolResult = await handler({ dataflowId: 'test-dataflow-id', executionId: 'test-execution-id' })
 
       expect(toolResult).toEqual({
         isError: true,
@@ -88,7 +88,7 @@ describe('getSchema', () => {
         .mockImplementationOnce(mockCreateSignedUrl)
         .mockImplementationOnce(mockGetSchemaFileError)
 
-      const toolResult = await handler({ dataflowId: 'test-dataflow-id' })
+      const toolResult = await handler({ dataflowId: 'test-dataflow-id', executionId: 'test-execution-id' })
 
       expect(toolResult).toEqual({
         isError: true,
@@ -109,7 +109,7 @@ describe('with invalid params', () => {
       isError: true,
       content: [{
         type: 'text',
-        text: 'This tool requires parameters',
+        text: 'Invalid parameters for get-schema tool. Validation error: Required',
       }]
     })
   })
@@ -121,19 +121,19 @@ describe('with invalid params', () => {
       isError: true,
       content: [{
         type: 'text',
-        text: 'Missing or invalid required parameter: dataflowId must be a non-empty string',
+        text: 'Invalid parameters for get-schema tool. Validation error: Required at "dataflowId"; Required at "executionId"',
       }]
     })
   })
 
   it('returns error on invalid dataflowId', async () => {
-    const toolResult = await handler({ dataflowId: 123 })
+    const toolResult = await handler({ dataflowId: 123, executionId: true })
 
     expect(toolResult).toEqual({
       isError: true,
       content: [{
         type: 'text',
-        text: 'Missing or invalid required parameter: dataflowId must be a non-empty string',
+        text: 'Invalid parameters for get-schema tool. Validation error: Expected string, received number at "dataflowId"; Expected string, received boolean at "executionId"',
       }]
     })
   })

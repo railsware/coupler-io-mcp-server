@@ -50,6 +50,7 @@ describe('getData', () => {
 
     const toolResult = await handler({
       dataflowId: 'test-dataflow-id',
+      executionId: 'test-execution-id',
       query: 'SELECT * FROM data'
     })
 
@@ -69,6 +70,7 @@ describe('getData', () => {
 
     const toolResult = await handler({
       dataflowId: 'test-dataflow-id',
+      executionId: 'test-execution-id',
       query: 'SELECT * FROM data'
     })
 
@@ -89,6 +91,7 @@ describe('getData', () => {
 
     const toolResult = await handler({
       dataflowId: 'test-dataflow-id',
+      executionId: 'test-execution-id',
       query: 'SELECT * FROM data'
     })
 
@@ -108,6 +111,7 @@ describe('getData', () => {
 
     const toolResult = await handler({
       dataflowId: 'test-dataflow-id',
+      executionId: 'test-execution-id',
       query: 'SELECT INVALID SQL QUERY'
     })
 
@@ -129,7 +133,7 @@ describe('with invalid params', () => {
       isError: true,
       content: [{
         type: 'text',
-        text: 'This tool requires parameters'
+        text: 'Invalid parameters for get-data tool. Validation error: Required'
       }]
     })
   })
@@ -141,19 +145,19 @@ describe('with invalid params', () => {
       isError: true,
       content: [{
         type: 'text',
-        text: 'Missing or invalid required parameter: dataflowId must be a non-empty string'
+        text: 'Invalid parameters for get-data tool. Validation error: Required at "dataflowId"; Required at "executionId"'
       }]
     })
   })
 
   it('returns error on missing query', async () => {
-    const toolResult = await handler({ dataflowId: 'test-dataflow-id' })
+    const toolResult = await handler({ dataflowId: 'test-dataflow-id', executionId: 'test-execution-id' })
 
     expect(toolResult).toEqual({
       isError: true,
       content: [{
         type: 'text',
-        text: 'Missing or invalid required parameter: query must be a non-empty string'
+        text: 'Invalid parameters for get-data tool. Validation error: Required at "query"'
       }]
     })
   })
@@ -161,6 +165,7 @@ describe('with invalid params', () => {
   it('returns error on invalid dataflowId', async () => {
     const toolResult = await handler({
       dataflowId: 123,
+      executionId: true,
       query: 'SELECT * FROM data'
     })
 
@@ -168,7 +173,7 @@ describe('with invalid params', () => {
       isError: true,
       content: [{
         type: 'text',
-        text: 'Missing or invalid required parameter: dataflowId must be a non-empty string'
+        text: 'Invalid parameters for get-data tool. Validation error: Expected string, received number at "dataflowId"; Expected string, received boolean at "executionId"'
       }]
     })
   })
@@ -183,7 +188,7 @@ describe('with invalid params', () => {
       isError: true,
       content: [{
         type: 'text',
-        text: 'Missing or invalid required parameter: query must be a non-empty string'
+        text: 'Invalid parameters for get-data tool. Validation error: Required at "executionId"; Expected string, received number at "query"'
       }]
     })
   })
@@ -191,6 +196,7 @@ describe('with invalid params', () => {
   it('returns error on non-SELECT query', async () => {
     const toolResult = await handler({
       dataflowId: 'test-dataflow-id',
+      executionId: 'test-execution-id',
       query: 'INSERT INTO data (col_0, col_1) VALUES (2, "Test 2")'
     })
 
@@ -198,7 +204,7 @@ describe('with invalid params', () => {
       isError: true,
       content: [{
         type: 'text',
-        text: 'Missing or invalid required parameter: query must start with SELECT'
+        text: 'Invalid parameters for get-data tool. Validation error: must start with "SELECT" at "query"'
       }]
     })
   })

@@ -43,12 +43,14 @@ Remove this line, if you're offline or if you specifically want to use the image
 
 ## Tools
 ### Data flows
-- **get-data** - Gets the result of a data flow run as a SQLite file and executes a read-only query on it.
+- **get-data** - Gets the result of a data flow run as a SQLite file and executes a read-only query on it. Currently, only data flows built from a dashboard or dataset template are supported.
   - `dataflowId`: Data flow ID (`string`, **required**)
+  - `executionId`: Data flow run ID (`string`, **required**)
   - `query`: Query to run on the data flow SQLite file (`string`, **required**)
 
-- **get-schema** - Gets the data flow schema file.
+- **get-schema** - Gets the data flow schema file. Currently, only data flows built from a dashboard or dataset template are supported.
   - `dataflowId`: Data flow ID (`string`, **required**)
+  - `executionId`: Data flow run ID (`string`, **required**)
 
 ## Development
 

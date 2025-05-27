@@ -1,6 +1,8 @@
+import { existsSync, writeFileSync, mkdirSync } from 'node:fs'
+
 import { COUPLER_ACCESS_TOKEN, NODE_ENV } from '@/env'
 import { CouplerioClient } from '@/lib/couplerio-client'
-import { existsSync, writeFileSync, mkdirSync } from 'node:fs'
+import type { SignedUrlDto } from '@/lib/couplerio-client/dataflows/signed_url'
 
 export const DOWNLOAD_DIR = `/tmp/coupler_mcp/${NODE_ENV}/dataflows`
 
@@ -104,7 +106,7 @@ export class FileManager {
       throw new Error(`Failed to get ${fileType} file signed URL for dataflow ID ${this.dataflowId}. Response status: ${response.status}`)
     }
 
-    const { signed_url: signedUrl } = await response.json() as { signed_url: string, file: string }
+    const { signed_url: signedUrl } = await response.json() as SignedUrlDto
 
     return signedUrl
   }

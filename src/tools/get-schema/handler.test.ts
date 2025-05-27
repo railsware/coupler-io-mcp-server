@@ -18,7 +18,7 @@ const mockSchema = {
 // Response mocks
 const mockCreateSignedUrl = createMockResponse(
   async () => new Response(
-    JSON.stringify({ file: 'schema', url: 'https://example.com/schema.json' })
+    JSON.stringify({ file: 'schema', signed_url: 'https://example.com/schema.json' })
   )
 )
 const mockGetSchemaFile = createMockResponse(

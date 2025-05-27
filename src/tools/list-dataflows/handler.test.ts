@@ -7,8 +7,8 @@ const createMockResponse = (responseFn: () => Promise<Response>): typeof fetch =
 }
 
 const mockResponse = [
-  { name: 'GSheet data flow', id: 'gsheet_dataflow' },
-  { name: 'JSON data flow', id: 'json_dataflow' }
+  { name: 'GSheet data flow', id: 'gsheet_dataflow', last_successful_execution_id: '11' },
+  { name: 'JSON data flow', id: 'json_dataflow', last_successful_execution_id: '22' }
 ]
 
 

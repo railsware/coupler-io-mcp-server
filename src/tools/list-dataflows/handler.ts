@@ -9,7 +9,7 @@ export const handler = async (): Promise<CallToolResult> => {
   const coupler = new CouplerioClient({ auth: COUPLER_ACCESS_TOKEN })
   const query = new URLSearchParams({ type: 'from_template' })
 
-  const response = await coupler.request(`/dataflows?${query}`)
+  const response = await coupler.request(`/dataflows?${query}{?type}`)
 
   if (!response.ok) {
     logger.error(`Failed to list dataflows. Response status: ${response.status}`)
@@ -19,5 +19,7 @@ export const handler = async (): Promise<CallToolResult> => {
     })
   }
 
-  return textResponse({ text: await response.text() })
+  const dataflows = await response.json()
+
+  return textResponse({ text: JSON.stringify(dataflows, null, 2), structuredContent: { dataflows } })
 }

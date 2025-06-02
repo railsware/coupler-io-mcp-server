@@ -58,8 +58,11 @@ describe('getData', () => {
       isError: false,
       content: [{
         type: 'text',
-        text: JSON.stringify([{ col_0: 1, col_1: 'Test' }])
-      }]
+        text: JSON.stringify([{ col_0: 1, col_1: 'Test' }], null, 2)
+      }],
+      structuredContent: {
+        data: [{ col_0: 1, col_1: 'Test' }]
+      }
     })
   })
 

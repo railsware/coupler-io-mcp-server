@@ -7,7 +7,7 @@ import { textResponse } from '@/util/tool-response'
 
 import { FileManager } from '@/tools/shared/file-manager'
 
-import { zodSchema } from './input-schema'
+import { zodSchema } from './schema'
 
 type ColumnDefinition = {
   key: string,
@@ -46,5 +46,5 @@ export const handler = async (params?: Record<string, unknown>): Promise<CallToo
     col.columnName = `col_${index}`
   })
 
-  return textResponse({ text: JSON.stringify(schema) })
+  return textResponse({ text: JSON.stringify(schema, null, 2), structuredContent: { schema } })
 }

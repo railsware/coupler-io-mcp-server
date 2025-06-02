@@ -5,11 +5,13 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprot
 import * as getData from '@/tools/get-data'
 import * as getSchema from '@/tools/get-schema'
 import * as listDataflows from '@/tools/list-dataflows'
+import * as getDatadlow from '@/tools/get-dataflow'
 
 const TOOL_MAP = {
   [getData.name]: getData.handler,
   [getSchema.name]: getSchema.handler,
   [listDataflows.name]: listDataflows.handler,
+  [getDatadlow.name]: getDatadlow.handler,
 }
 
 export const server = new Server({
@@ -40,6 +42,7 @@ server.setRequestHandler(
       getData.toolListEntry,
       getSchema.toolListEntry,
       listDataflows.toolListEntry,
+      getDatadlow.toolListEntry,
     ]
   })
 )

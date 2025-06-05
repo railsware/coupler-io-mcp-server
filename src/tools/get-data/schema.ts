@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { zodToJsonSchema } from 'zod-to-json-schema'
 
-export const zodSchema = z.object({
+export const zodInputSchema = z.object({
   dataflowId: z.string()
     .min(1, 'dataflowId is required')
     .regex(/^\S+$/, 'dataflowId must not contain whitespace')
@@ -16,4 +16,12 @@ export const zodSchema = z.object({
     .describe('The SQL query to run on the data flow sqlite file.'),
 }).strict()
 
-export const inputSchema = zodToJsonSchema(zodSchema)
+export const inputSchema = zodToJsonSchema(zodInputSchema)
+
+const zodOutputSchema = z.object({
+  data: z.array(
+    z.record(z.unknown())
+  ).describe('The data returned from the query.'),
+}).strict()
+
+export const outputSchema = zodToJsonSchema(zodOutputSchema)

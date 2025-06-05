@@ -15,3 +15,18 @@ export const zodSchema = z.object({
 }).strict()
 
 export const inputSchema = zodToJsonSchema(zodSchema)
+
+const zodOutputSchema = z.object({
+  schema: z.object({
+    columns: z.array(z.object({
+      key: z.string(),
+      label: z.string().describe('Human readable column label.'),
+      type: z.string().describe('Column data type.'),
+      columnName: z.string().describe('The actual column name in the SQLite database.'),
+      schema: z.record(z.unknown()),
+      typeOptions: z.record(z.unknown()).optional().describe('Additional options for the column type.'),
+    }))
+  })
+})
+
+export const outputSchema = zodToJsonSchema(zodOutputSchema)

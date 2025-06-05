@@ -59,8 +59,16 @@ describe('getSchema', () => {
             { key: 'col_0', label: 'Column 1', schema: { type: 'string' }, columnName: 'col_0' },
             { key: 'col_1', label: 'Column 2', schema: { type: 'number' }, columnName: 'col_1' },
           ]
-        }),
-      }]
+        }, null, 2)
+      }],
+      structuredContent: {
+        schema: {
+          columns: [
+            { key: 'col_0', label: 'Column 1', schema: { type: 'string' }, columnName: 'col_0' },
+            { key: 'col_1', label: 'Column 2', schema: { type: 'number' }, columnName: 'col_1' },
+          ]
+        }
+      }
     })
   })
 

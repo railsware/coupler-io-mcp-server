@@ -3,7 +3,8 @@
     "rootDir": "./src",
     "target": "ESNext",
     "lib": ["ESNext"],
-    "module": "Preserve",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "moduleDetection": "force",
     "resolveJsonModule": true,
     "esModuleInterop": true,
@@ -16,6 +17,12 @@
       "@/util/*": ["./src/util/*"],
       "@/logger": ["./src/logger"]
     },
+
+    // using `tsx` as a bundler
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true,
+    "verbatimModuleSyntax": true,
 
     // Type checking
     "strict": true,

@@ -44,8 +44,11 @@ describe('listDataflows', () => {
       isError: false,
       content: [{
         type: 'text',
-        text: JSON.stringify(mockResponse),
-      }]
+        text: JSON.stringify(mockResponse, null, 2),
+      }],
+      structuredContent: {
+        dataflows: mockResponse
+      }
     })
   })
 

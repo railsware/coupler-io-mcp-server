@@ -6,10 +6,10 @@ import { logger } from '@/logger'
 import { textResponse } from '@/util/tool-response'
 import { FileManager } from '@/tools/shared/file-manager'
 
-import { zodSchema } from './input-schema'
+import { zodInputSchema } from './schema'
 
 export const handler = async (params?: Record<string, unknown>): Promise<CallToolResult> => {
-  const validationResult = zodSchema.safeParse(params)
+  const validationResult = zodInputSchema.safeParse(params)
 
   if (!validationResult.success) {
     const error = fromError(validationResult.error)
@@ -41,5 +41,8 @@ export const handler = async (params?: Record<string, unknown>): Promise<CallToo
     db.close()
   }
 
-  return textResponse({ text: JSON.stringify(queryResult) })
+  return textResponse({
+    text: JSON.stringify(queryResult, null, 2),
+    structuredContent: { data: queryResult }
+  })
 }

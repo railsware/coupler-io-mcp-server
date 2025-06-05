@@ -14,7 +14,7 @@
   },
   "description": "Coupler.io MCP server",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.11.4",
+    "@modelcontextprotocol/sdk": "1.12.1",
     "better-sqlite3": "11.10.0",
     "json-schema-to-zod": "2.6.1",
     "lodash": "4.17.21",
@@ -22,22 +22,22 @@
     "tsx": "4.19.4",
     "url-template": "3.1.1",
     "znv": "0.5.0",
-    "zod": "3.24.4",
+    "zod": "3.25.46",
     "zod-to-json-schema": "3.24.5",
     "zod-validation-error": "3.4.1"
   },
   "devDependencies": {
-    "@eslint/js": "9.27.0",
-    "@modelcontextprotocol/inspector": "0.12.0",
+    "@eslint/js": "9.28.0",
+    "@modelcontextprotocol/inspector": "0.13.0",
     "@types/better-sqlite3": "7.6.13",
-    "@types/lodash": "4.17.16",
-    "@types/node": "22.15.19",
-    "eslint": "9.27.0",
+    "@types/lodash": "4.17.17",
+    "@types/node": "22.15.29",
+    "eslint": "9.28.0",
     "lefthook": "1.11.13",
     "pino-pretty": "13.0.0",
     "typescript": "5.8.3",
-    "typescript-eslint": "8.32.1",
+    "typescript-eslint": "8.33.0",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "3.1.3"
+    "vitest": "3.1.4"
   }
 }

@@ -5,11 +5,13 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprot
 import * as getData from '@/tools/get-data'
 import * as getSchema from '@/tools/get-schema'
 import * as listDataflows from '@/tools/list-dataflows'
+import * as getDatadlow from '@/tools/get-dataflow'
 
 const TOOL_MAP = {
-  [getData.name]: getData.toolMapEntry,
-  [getSchema.name]: getSchema.toolMapEntry,
-  [listDataflows.name]: listDataflows.toolMapEntry,
+  [getData.name]: getData.handler,
+  [getSchema.name]: getSchema.handler,
+  [listDataflows.name]: listDataflows.handler,
+  [getDatadlow.name]: getDatadlow.handler,
 }
 
 export const server = new Server({
@@ -24,12 +26,12 @@ export const server = new Server({
 
 // Look up the tool by name in TOOL_MAP and call its handler
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  const tool = TOOL_MAP[request.params.name as keyof typeof TOOL_MAP]
-  if (!tool) {
-    throw new Error(`Tool ${request.params.name} not found`)
+  const handler = TOOL_MAP[request.params.name as keyof typeof TOOL_MAP]
+  if (!handler) {
+    throw new Error(`Handler for tool "${request.params.name}" not found`)
   }
 
-  return await tool.handler(request.params.arguments)
+  return await handler(request.params.arguments)
 })
 
 // List all tools
@@ -40,6 +42,7 @@ server.setRequestHandler(
       getData.toolListEntry,
       getSchema.toolListEntry,
       listDataflows.toolListEntry,
+      getDatadlow.toolListEntry,
     ]
   })
 )

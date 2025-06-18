@@ -7,7 +7,8 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "dev": "tsx --env-file=.env.local --watch src/index.ts",
-    "inspect:node": "npx mcp-inspector --config config/mcp-inspector/development.json --server coupler_node",
+    "inspect:node": "npx mcp-inspector --config config/mcp-inspector/development.json --server coupler_node_stdio",
+    "inspect:http": "npx mcp-inspector --config config/mcp-inspector/development.json --server coupler_http",
     "inspect:docker": "npx mcp-inspector --config config/mcp-inspector/development.json --server coupler_docker",
     "lint": "eslint src/ --ext .ts",
     "test": "vitest run"

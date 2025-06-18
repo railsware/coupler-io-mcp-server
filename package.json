@@ -14,30 +14,34 @@
   },
   "description": "Coupler.io MCP server",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.12.1",
+    "@google-cloud/pino-logging-gcp-config": "1.0.4",
+    "@modelcontextprotocol/sdk": "1.12.3",
     "better-sqlite3": "11.10.0",
+    "express": "5.1.0",
     "json-schema-to-zod": "2.6.1",
     "lodash": "4.17.21",
     "pino": "9.7.0",
-    "tsx": "4.19.4",
+    "pino-http": "10.5.0",
+    "tsx": "4.20.3",
     "url-template": "3.1.1",
     "znv": "0.5.0",
-    "zod": "3.25.46",
+    "zod": "3.25.67",
     "zod-to-json-schema": "3.24.5",
-    "zod-validation-error": "3.4.1"
+    "zod-validation-error": "3.5.2"
   },
   "devDependencies": {
-    "@eslint/js": "9.28.0",
-    "@modelcontextprotocol/inspector": "0.13.0",
+    "@eslint/js": "9.29.0",
+    "@modelcontextprotocol/inspector": "0.14.2",
     "@types/better-sqlite3": "7.6.13",
-    "@types/lodash": "4.17.17",
-    "@types/node": "22.15.29",
-    "eslint": "9.28.0",
-    "lefthook": "1.11.13",
+    "@types/express": "5.0.3",
+    "@types/lodash": "4.17.18",
+    "@types/node": "24.0.3",
+    "eslint": "9.29.0",
+    "lefthook": "1.11.14",
     "pino-pretty": "13.0.0",
     "typescript": "5.8.3",
-    "typescript-eslint": "8.33.0",
+    "typescript-eslint": "8.34.1",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "3.1.4"
+    "vitest": "3.2.4"
   }
 }

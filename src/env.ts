@@ -13,6 +13,7 @@ export const {
   APP_VERSION,
   TRANSPORT,
   AUTHORIZATION_SERVER_HOST,
+  PORT,
 } = parseEnv(process.env, {
     COUPLER_API_HOST: z.string().url().default('https://app.coupler.io'),
     COUPLER_ACCESS_TOKEN: z.string().trim().min(1),
@@ -21,5 +22,6 @@ export const {
     NODE_ENV: z.enum(ENVS).default('development'),
     APP_VERSION: z.string().trim().min(1),
     TRANSPORT: z.enum(TRANSPORTS).default('stdio'),
-    AUTHORIZATION_SERVER_HOST: z.string().url().default('https://auth.coupler.io')
+    AUTHORIZATION_SERVER_HOST: z.string().url().default('https://auth.coupler.io'),
+    PORT: z.number().default(3001)
   })

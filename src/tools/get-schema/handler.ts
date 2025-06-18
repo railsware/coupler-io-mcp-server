@@ -2,7 +2,7 @@ import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 import { readFileSync } from 'fs'
 import { fromError } from 'zod-validation-error'
 
-import { logger } from '@/logger'
+import { logger } from '@/server/logging'
 import { textResponse } from '@/util/tool-response'
 
 import { FileManager } from '@/tools/shared/file-manager'

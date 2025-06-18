@@ -2,7 +2,7 @@ import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 
 import { zodInputSchema } from './schema'
 
-import { logger } from '@/logger'
+import { logger } from '@/server/logging'
 import { textResponse } from '@/util/tool-response'
 import { COUPLER_ACCESS_TOKEN } from '@/env'
 import { CouplerioClient } from '@/lib/couplerio-client'

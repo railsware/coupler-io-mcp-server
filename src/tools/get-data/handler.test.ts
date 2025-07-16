@@ -2,8 +2,8 @@ import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { rm } from 'node:fs/promises'
 import Database from 'better-sqlite3'
 
-import { handler } from './handler'
-import { DOWNLOAD_DIR } from '../shared/file-manager'
+import { handler } from './handler.js'
+import { DOWNLOAD_DIR } from '#tools/shared/file-manager.js'
 
 const createMockResponse = (responseFn: () => Promise<Response>): typeof fetch => {
   return responseFn

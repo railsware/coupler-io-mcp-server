@@ -2,18 +2,17 @@ import Database from 'better-sqlite3'
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 import { fromError } from 'zod-validation-error'
 
-import { logger } from '@/logger'
-import { textResponse } from '@/util/tool-response'
-import { FileManager } from '@/tools/shared/file-manager'
+import { textResponse } from '#util/tool-response.js'
+import { FileManager } from '#tools/shared/file-manager.js'
 
-import { zodInputSchema } from './schema'
+import { zodInputSchema } from './schema.js'
 
 export const handler = async (params?: Record<string, unknown>): Promise<CallToolResult> => {
   const validationResult = zodInputSchema.safeParse(params)
 
   if (!validationResult.success) {
     const error = fromError(validationResult.error)
-    logger.error(`Invalid parameters for get-data tool: ${error.toString()}`)
+    console.error(`Invalid parameters for get-data tool: ${error.toString()}`)
 
     return textResponse({
       text: `Invalid parameters for get-data tool. ${error.toString()}`,

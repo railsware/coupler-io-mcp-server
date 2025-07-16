@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "homepage": "https://coupler.io",
+  "type": "module",
   "scripts": {
     "start": "tsx src/index.ts",
     "dev": "tsx --env-file=.env.local --watch src/index.ts",
@@ -12,12 +13,18 @@
     "lint": "eslint src/ --ext .ts",
     "test": "vitest run"
   },
+  "imports": {
+    "#*": {
+      "coupler-io-mcp-server": "./dist/*",
+      "default": "./src/*"
+    }
+  },
   "description": "Coupler.io MCP server",
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.12.1",
     "better-sqlite3": "11.10.0",
     "json-schema-to-zod": "2.6.1",
-    "lodash": "4.17.21",
+    "lodash-es": "4.17.21",
     "pino": "9.7.0",
     "tsx": "4.19.4",
     "url-template": "3.1.1",
@@ -27,10 +34,11 @@
     "zod-validation-error": "3.4.1"
   },
   "devDependencies": {
+    "@anthropic-ai/dxt": "0.2.5",
     "@eslint/js": "9.28.0",
     "@modelcontextprotocol/inspector": "0.13.0",
     "@types/better-sqlite3": "7.6.13",
-    "@types/lodash": "4.17.17",
+    "@types/lodash-es": "4.17.12",
     "@types/node": "22.15.29",
     "eslint": "9.28.0",
     "lefthook": "1.11.13",

@@ -1,8 +1,8 @@
 import { existsSync, writeFileSync, mkdirSync } from 'node:fs'
 
-import { COUPLER_ACCESS_TOKEN, NODE_ENV } from '@/env'
-import { CouplerioClient } from '@/lib/couplerio-client'
-import type { SignedUrlDto } from '@/lib/couplerio-client/dataflows/signed_url'
+import { COUPLER_ACCESS_TOKEN, NODE_ENV } from '#env.js'
+import { CouplerioClient } from '#lib/couplerio-client/index.js'
+import type { SignedUrlDto } from '#lib/couplerio-client/dataflows/signed_url.js'
 
 export const DOWNLOAD_DIR = `/tmp/coupler_mcp/${NODE_ENV}/dataflows`
 

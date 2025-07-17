@@ -1,0 +1,73 @@
+{
+  "dxt_version": "0.1",
+  "name": "coupler-io-mcp-server",
+  "display_name": "Coupler.io",
+  "version": "0.0.3",
+  "description": "Coupler.io MCP server",
+  "author": {
+    "name": "Coupler.io",
+    "url": "https://coupler.io"
+  },
+  "homepage": "https://coupler.io",
+  "documentation": "https://coupler.io",
+  "support": "https://coupler.io",
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/index.js"
+      ],
+      "env": {
+        "COUPLER_ACCESS_TOKEN": "${user_config.coupler_access_token}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "get-data",
+      "description": "Get data from a Coupler.io data flow run."
+    },
+    {
+      "name": "get-schema",
+      "description": "Get data table schema from a Coupler.io data flow."
+    },
+    {
+      "name": "list-dataflows",
+      "description": "List my Coupler.io data flows."
+    },
+    {
+      "name": "get-dataflow",
+      "description": "Get a Coupler.io data flow by ID."
+    }
+  ],
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=16.0.0"
+    }
+  },
+  "user_config": {
+    "coupler_access_token": {
+      "type": "string",
+      "title": "Coupler.io API access token",
+      "description": "Coupler.io API access token",
+      "required": true,
+      "sensitive": true
+    }
+  },
+  "keywords": [
+    "coupler.io",
+    "data analytics"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/railsware/coupler-io-mcp-server"
+  }
+}

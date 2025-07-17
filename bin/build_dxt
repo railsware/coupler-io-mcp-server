@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
+
+if [ $? -ne 0 ]; then
+  echo "Error: Not in a git repository"
+  exit 1
+fi
+
+CURRENT_DIR="$(pwd)"
+
+if [ "$CURRENT_DIR" != "$REPO_ROOT" ]; then
+  echo "Error: This script must be run from the repository root"
+  echo "Current directory: $CURRENT_DIR"
+  echo "Repository root: $REPO_ROOT"
+  echo "Please cd to the repository root and run again"
+  exit 1
+fi
+
+npm run clean && npm run build
+mkdir -p dxt_build
+mkdir -p dxt_output
+cp -a dist dxt_build/dist
+
+cp package.json dxt_build/package.json
+cp package-lock.json dxt_build/package-lock.json
+cp manifest.json dxt_build/manifest.json
+cd dxt_build/
+
+npm ci --omit=dev
+
+cd "$REPO_ROOT"
+
+npm run dxt:pack

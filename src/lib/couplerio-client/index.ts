@@ -1,8 +1,7 @@
-import { parseTemplate } from 'url-template'
-import type { Template } from 'url-template'
+import { parseTemplate, type Template } from 'url-template'
 import { omit } from 'lodash-es'
-
-import { COUPLER_API_HOST, APP_VERSION } from '#env.js'
+import { logger } from '../../logger/index.js'
+import { COUPLER_API_HOST, APP_VERSION } from '../../env.js'
 
 type OptionsType = {
   request: RequestInit,
@@ -51,7 +50,7 @@ export class CouplerioClient {
       ...requestOptions,
     })
 
-    console.error(`Request URL: ${url}`)
+    logger.debug(`Request URL: ${url}`)
 
     return await fetch(request)
   }

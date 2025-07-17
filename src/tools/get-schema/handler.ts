@@ -2,10 +2,9 @@ import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 import { readFileSync } from 'fs'
 import { fromError } from 'zod-validation-error'
 
-import { textResponse } from '#util/tool-response.js'
-
-import { FileManager } from '#tools/shared/file-manager.js'
-
+import { textResponse } from '../../util/tool-response.js'
+import { FileManager } from '../shared/file-manager.js'
+import { logger } from '../../logger/index.js'
 import { zodSchema } from './schema.js'
 
 type ColumnDefinition = {
@@ -21,7 +20,7 @@ export const handler = async (params?: Record<string, unknown>): Promise<CallToo
 
   if (!validationResult.success) {
     const error = fromError(validationResult.error)
-    console.error(`Invalid parameters for get-schema tool: ${error.toString()}`)
+    logger.error(`Invalid parameters for get-schema tool: ${error.toString()}`)
 
     return textResponse({
       text: `Invalid parameters for get-schema tool. ${error.toString()}`,
@@ -36,7 +35,7 @@ export const handler = async (params?: Record<string, unknown>): Promise<CallToo
   try {
     schemaPath = await fileManager.getFile('schema')
   } catch (e) {
-    console.error(`Failed to get dataflow schema file: ${e}`)
+    logger.error(`Failed to get dataflow schema file: ${e}`)
     return textResponse({ text: `Failed to get dataflow ${validationResult.data.dataflowId} schema file. ${e}`, isError: true })
   }
 

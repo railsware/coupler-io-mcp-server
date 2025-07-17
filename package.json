@@ -13,12 +13,6 @@
     "lint": "eslint src/ --ext .ts",
     "test": "vitest run"
   },
-  "imports": {
-    "#*": {
-      "coupler-io-mcp-server": "./dist/*",
-      "default": "./src/*"
-    }
-  },
   "description": "Coupler.io MCP server",
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.12.1",

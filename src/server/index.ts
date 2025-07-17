@@ -2,10 +2,10 @@ import { Server } from '@modelcontextprotocol/sdk/server/index.js'
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js'
 
 // Import all tools here
-import * as getData from '#tools/get-data/index.js'
-import * as getSchema from '#tools/get-schema/index.js'
-import * as listDataflows from '#tools/list-dataflows/index.js'
-import * as getDataflow from '#tools/get-dataflow/index.js'
+import * as getData from '../tools/get-data/index.js'
+import * as getSchema from '../tools/get-schema/index.js'
+import * as listDataflows from '../tools/list-dataflows/index.js'
+import * as getDataflow from '../tools/get-dataflow/index.js'
 
 const TOOL_MAP = {
   [getData.name]: getData.handler,

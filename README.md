@@ -134,6 +134,16 @@ Edit your `claude_desktop_config.json`, add an entry for our server:
 }
 ```
 
+Or just run the image with Docker:
+```
+docker run --env-file .env.local \
+  --add-host storage.test=host-gateway \
+  --add-host lvh.me=host-gateway \
+  --rm \
+  -i \
+  coupler-io-mcp-server-development
+```
+
 ### Using MCP inspector
 [Use MCP inspector in CLI mode](https://github.com/modelcontextprotocol/inspector/blob/24e8861a88f843d57cdb637a5ae3afd0e528c5f3/README.md#cli-mode) for smoke testing the server with a short feedback loop:
 

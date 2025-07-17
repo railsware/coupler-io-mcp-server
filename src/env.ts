@@ -15,6 +15,6 @@ export const {
     COUPLER_ACCESS_TOKEN: z.string().trim().min(1),
     LOG_STDIO: z.boolean().default(false),
     LOG_LEVEL: z.enum(LOG_LEVELS).default('info'),
-    NODE_ENV: z.enum(ENVS).default('development'),
+    NODE_ENV: z.enum(ENVS).default('production'),
     APP_VERSION: z.string().trim().min(1).default('development')
   })

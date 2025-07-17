@@ -26,7 +26,8 @@ cp -a dist dxt_build/dist
 
 cp package.json dxt_build/package.json
 cp package-lock.json dxt_build/package-lock.json
-cp manifest.json dxt_build/manifest.json
+
+sed -e "s/{{APP_VERSION_PLACEHOLDER}}/$(node -e 'console.log(require("./package.json").version)')/" manifest.json > dxt_build/manifest.json
 cd dxt_build/
 
 npm ci --omit=dev

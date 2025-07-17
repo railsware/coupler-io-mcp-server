@@ -19,6 +19,7 @@
       "command": "npm",
       "args": [
         "run",
+        "--silent",
         "dev"
       ]
     }

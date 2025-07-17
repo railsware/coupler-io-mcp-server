@@ -78,7 +78,8 @@ cp .env.example .env.local
 ### Work with a raw server
 Run the MCP server:
 ```shell
-npm run dev
+# Use `--silent` flag to prevent NPM logging to STDOUT which breaks server transport
+npm run --silent dev
 ```
 
 #### Run [MCP server inspector](https://github.com/modelcontextprotocol/inspector) for debugging

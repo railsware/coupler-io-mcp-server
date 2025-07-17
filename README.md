@@ -218,5 +218,15 @@ docker pull ghcr.io/railsware/coupler-io-mcp-server
 ```
 Run the release image with Claude Desktop and other supported clients.
 
+## Claude Desktop extension (DXT)
+
+### Build & self-sign
+```shell
+bin/build_dxt # => dxt_output/coupler-mcp.dxt
+npm run dxt:selfsign
+```
+
+You can now either install the .dxt file or use the contents of `dxt/` dir to load unpacked extension from Developer menu.
+
 ## License
 This project is licensed under the terms of the MIT open source license. Please refer to [MIT](./LICENSE) for the full terms.

@@ -9,7 +9,7 @@
     "build": "tsc",
     "clean": "rm -rf dist/ dxt_build/ dxt_output/",
     "dev": "tsx --env-file=.env.local --watch src/index.ts",
-    "dxt:pack": "dxt pack dxt_build/ dxt_output/coupler-mcp.dxt",
+    "dxt:pack": "dxt pack dxt_build/",
     "dxt:selfsign": "dxt sign dxt_output/coupler-mcp.dxt --self-signed",
     "inspect:node": "npx mcp-inspector --config config/mcp-inspector/development.json --server coupler_node",
     "inspect:docker": "npx mcp-inspector --config config/mcp-inspector/development.json --server coupler_docker",

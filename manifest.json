@@ -1,8 +1,8 @@
 {
   "dxt_version": "0.1",
-  "name": "coupler-io-mcp-server",
+  "name": "coupler-io-data-analyst",
   "display_name": "Coupler.io Data Analyst",
-  "version": "0.0.3",
+  "version": "{{APP_VERSION_PLACEHOLDER}}",
   "description": "Coupler.io Data Analyst is an AI analytics agent that thoroughly analyzes your data of any complexity in plain language.",
   "long_description": "Coupler.io Data Analyst enables AI to access and analyze blended, large-scale volumes of data without coding. It allows Coupler.io users to analyze data from the dashboards and data sets via natural language (chatting in Claude). In essence, Coupler.io Data Analyst serves as an AI analyst with an accessible and secure way to get insights from multi-source data. This way, you can optimize your PPC and social media campaigns, analyze CRM data, reconcile finance indicators and forecast, track sales pipelines, improve SEO performance. All these and more are available without specific tech knowledge or complex setup – bring AI directly to your data and make informed decisions faster.",
   "author": {

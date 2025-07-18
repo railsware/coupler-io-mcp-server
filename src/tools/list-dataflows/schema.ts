@@ -1,5 +1,5 @@
 import z from 'zod'
-import zodToJsonSchema from 'zod-to-json-schema'
+import { zodToJsonSchema } from 'zod-to-json-schema'
 
 export const inputSchema = zodToJsonSchema(z.object({}).strict())
 

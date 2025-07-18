@@ -1,8 +1,8 @@
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { rm } from 'node:fs/promises'
 
-import { DOWNLOAD_DIR } from '@/tools/shared/file-manager'
-import { handler } from './handler'
+import { DOWNLOAD_DIR } from '../shared/file-manager.js'
+import { handler } from './handler.js'
 
 const createMockResponse = (responseFn: () => Promise<Response>): typeof fetch => {
   return responseFn

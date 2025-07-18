@@ -1,37 +1,34 @@
 {
+  "extends": ["@tsconfig/node22/tsconfig.json"],
   "compilerOptions": {
+    "customConditions": ["coupler-io-mcp-server"],
     "rootDir": "./src",
-    "target": "ESNext",
-    "lib": ["ESNext"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "moduleDetection": "force",
-    "resolveJsonModule": true,
+    "module": "nodenext",
+    "moduleResolution": "node16",
     "esModuleInterop": true,
+    "target": "es2022",
+    "lib": [
+      "ES2024",
+      "ESNext.Array",
+      "ESNext.Collection",
+      "ESNext.Iterator"
+    ],
+    "outDir": "./dist",
     "allowJs": true,
-    "paths": {
-      "@/tools/*": ["./src/tools/*"],
-      "@/server": ["./src/server"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/env": ["./src/env"],
-      "@/util/*": ["./src/util/*"],
-      "@/logger": ["./src/logger"]
-    },
-
-    // using `tsx` as a bundler
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
-    "allowArbitraryExtensions": true,
-    "verbatimModuleSyntax": true,
 
     // Type checking
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true
   },
-  "include": [
-    "src/**/*.ts"
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "**/*.test.ts",
+    "node_modules",
+    "dist",
+    "src/test/**/*.ts"
   ]
 }

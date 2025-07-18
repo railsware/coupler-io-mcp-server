@@ -1,5 +1,5 @@
-import pino from 'pino'
-import { NODE_ENV, LOG_STDIO, LOG_LEVEL } from '@/env'
+import { pino } from 'pino'
+import { LOG_STDIO, LOG_LEVEL, NODE_ENV } from '../env.js'
 
 // "Spy" on STDIO and log to a file
 ;(() => {
@@ -9,8 +9,8 @@ import { NODE_ENV, LOG_STDIO, LOG_LEVEL } from '@/env'
 
   process.stdout.write = function(
     chunk: string | Uint8Array,
-    encodingOrCallback?: BufferEncoding | ((err?: Error) => void),
-    callback?: (err?: Error) => void
+    encodingOrCallback?: BufferEncoding | ((err?: Error | null) => void),
+    callback?: (err?: Error | null) => void
   ): boolean {
     logger.info(`[STDOUT]: ${chunk.toString()}`)
     if (typeof encodingOrCallback === 'function') {
@@ -25,12 +25,39 @@ import { NODE_ENV, LOG_STDIO, LOG_LEVEL } from '@/env'
   })
 })()
 
-const fileDestination = `log/${NODE_ENV}.log`
+const prettyStdErrTransport = {
+  target: 'pino-pretty',
+  options: {
+    destination: process.stderr.fd,
+    colorize: true,
+  }
+}
 
+const stdErrTransport = {
+  target: 'pino/file',
+  options: {
+    destination: process.stderr.fd,
+    colorize: false,
+  }
+}
+
+const fileTransport = {
+  target: 'pino/file',
+  options: {
+    destination: `log/${NODE_ENV}.log`,
+    colorize: false,
+    mkdir: true,
+  },
+}
+
+const transportForNodeEnv = {
+  development: prettyStdErrTransport,
+  production: stdErrTransport,
+  test: fileTransport,
+}
+
+// Logs to STDERR
 export const logger = pino({
   level: LOG_LEVEL || 'info',
-  transport: {
-    target: 'pino/file',
-    options: { destination: fileDestination, mkdir: true },
-  },
+  transport: transportForNodeEnv[NODE_ENV]
 })

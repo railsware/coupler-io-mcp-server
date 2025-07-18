@@ -1,9 +1,7 @@
-import { parseTemplate } from 'url-template'
-import type { Template } from 'url-template'
-import { omit } from 'lodash'
-
-import { COUPLER_API_HOST, APP_VERSION } from '@/env'
-import { logger } from '@/logger'
+import { parseTemplate, type Template } from 'url-template'
+import { omit } from 'lodash-es'
+import { logger } from '../../logger/index.js'
+import { COUPLER_API_HOST, APP_VERSION } from '../../env.js'
 
 type OptionsType = {
   request: RequestInit,

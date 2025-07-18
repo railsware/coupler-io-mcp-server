@@ -1,12 +1,12 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
-
-import { zodInputSchema } from './schema'
-
-import { logger } from '@/logger'
-import { textResponse } from '@/util/tool-response'
-import { COUPLER_ACCESS_TOKEN } from '@/env'
-import { CouplerioClient } from '@/lib/couplerio-client'
 import { fromError } from 'zod-validation-error'
+
+import { zodInputSchema } from './schema.js'
+
+import { textResponse } from '../../util/tool-response.js'
+import { COUPLER_ACCESS_TOKEN } from '../../env.js'
+import { CouplerioClient } from '../../lib/couplerio-client/index.js'
+import { logger } from '../../logger/index.js'
 
 export const handler = async (params?: Record<string, unknown>): Promise<CallToolResult> => {
   const validationResult = zodInputSchema.safeParse(params)

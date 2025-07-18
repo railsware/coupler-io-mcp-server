@@ -1,6 +1,6 @@
-import { inputSchema, outputSchema } from './schema'
+import { inputSchema, outputSchema } from './schema.js'
 
-export { handler } from './handler'
+export { handler } from './handler.js'
 
 export const name = 'get-dataflow'
 export const description = 'Get a Coupler.io data flow by ID.'

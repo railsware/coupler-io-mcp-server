@@ -1,6 +1,6 @@
-import { inputSchema, outputSchema } from './schema'
+import { inputSchema, outputSchema } from './schema.js'
 
-export { handler } from './handler'
+export { handler } from './handler.js'
 export const name = 'get-schema'
 export const description = 'Get data table schema from a Coupler.io data flow. Get column names from `columnName` properties in column definitions. Example: {"columns":[{"key":"Row Updated At.0","label":"Row Updated At","schema":{"type":"string"},"typeOptions":{},"columnName":"col_0"},{"key":"Dimension: Source.0","label":"Dimension: Source","schema":{"type":"string"},"typeOptions":{},"columnName":"col_1"}]}. Here the columns are `col_0` and `col_1`.'
 

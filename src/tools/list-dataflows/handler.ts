@@ -1,9 +1,9 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 
-import { logger } from '@/logger'
-import { textResponse } from '@/util/tool-response'
-import { COUPLER_ACCESS_TOKEN } from '@/env'
-import { CouplerioClient } from '@/lib/couplerio-client'
+import { textResponse } from '../../util/tool-response.js'
+import { COUPLER_ACCESS_TOKEN } from '../../env.js'
+import { CouplerioClient } from '../../lib/couplerio-client/index.js'
+import { logger } from '../../logger/index.js'
 
 export const handler = async (): Promise<CallToolResult> => {
   const coupler = new CouplerioClient({ auth: COUPLER_ACCESS_TOKEN })

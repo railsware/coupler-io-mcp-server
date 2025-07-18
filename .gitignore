@@ -48,5 +48,7 @@ node_modules/
 .env.local
 
 dist
+dxt_build
+dxt_output
 log/*
 !log/*.gitkeep

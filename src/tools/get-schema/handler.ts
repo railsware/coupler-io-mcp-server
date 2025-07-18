@@ -2,12 +2,10 @@ import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 import { readFileSync } from 'fs'
 import { fromError } from 'zod-validation-error'
 
-import { logger } from '@/logger'
-import { textResponse } from '@/util/tool-response'
-
-import { FileManager } from '@/tools/shared/file-manager'
-
-import { zodSchema } from './schema'
+import { textResponse } from '../../util/tool-response.js'
+import { FileManager } from '../shared/file-manager.js'
+import { logger } from '../../logger/index.js'
+import { zodSchema } from './schema.js'
 
 type ColumnDefinition = {
   key: string,

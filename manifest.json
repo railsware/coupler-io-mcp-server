@@ -1,18 +1,18 @@
 {
   "dxt_version": "0.1",
   "name": "coupler-io-data-analyst",
-  "display_name": "Coupler.io Data Analyst",
+  "display_name": "Coupler.io",
   "version": "{{APP_VERSION_PLACEHOLDER}}",
-  "description": "Coupler.io Data Analyst is an AI analytics agent that thoroughly analyzes your data of any complexity in plain language.",
-  "long_description": "Coupler.io Data Analyst enables AI to access and analyze blended, large-scale volumes of data without coding. It allows Coupler.io users to analyze data from the dashboards and data sets via natural language (chatting in Claude). In essence, Coupler.io Data Analyst serves as an AI analyst with an accessible and secure way to get insights from multi-source data. This way, you can optimize your PPC and social media campaigns, analyze CRM data, reconcile finance indicators and forecast, track sales pipelines, improve SEO performance. All these and more are available without specific tech knowledge or complex setup – bring AI directly to your data and make informed decisions faster.",
+  "description": "Connect data from hundreds of data sources and apps to analyze it with Claude.",
+  "long_description": "Key features\n\nAccess data via natural language: Analyze data without SQL or coding skills. Connect to hundreds of data flows and dashboards, and get answers just by asking like you'd ask your colleague.\n\nAlways stay up to date: Coupler.io keeps your data fresh based on the schedule you create, so Claude delivers on-demand reports and insights whenever you need them.\n\nBlend data across sources: Combine data from multiple sources and interact with it directly in your AI chat.\n\nAnalyze big data with AI: Coupler.io MCP enables Claude to handle large datasets without limits, so you get complete insights without context window restrictions.\n\nTurn your data into dialogue: analyze, explore, and automate insights directly in Claude.",
   "author": {
     "name": "Coupler.io",
     "url": "https://coupler.io",
-    "email": "support@coupler.io"
+    "email": "contact@coupler.io"
   },
   "homepage": "https://coupler.io",
-  "documentation": "https://help.coupler.io/article/592-coupler-local-mcp-server",
-  "support": "https://coupler.io",
+  "documentation": "https://rw.rw/couplerio/mcp",
+  "support": "https://help.coupler.io",
   "icon": "icon.png",
   "server": {
     "type": "node",

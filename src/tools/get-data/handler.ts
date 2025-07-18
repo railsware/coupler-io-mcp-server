@@ -1,4 +1,4 @@
-import Database from 'better-sqlite3'
+import { DatabaseSync as Database } from 'node:sqlite'
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 import { fromError } from 'zod-validation-error'
 

@@ -31,6 +31,7 @@ mkdir -p dxt_build
 mkdir -p dxt_output
 cp -a dist dxt_build/dist
 
+cp icon.png dxt_build/icon.png
 cp package.json dxt_build/package.json
 cp package-lock.json dxt_build/package-lock.json
 

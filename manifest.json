@@ -13,6 +13,7 @@
   "homepage": "https://coupler.io",
   "documentation": "https://help.coupler.io/article/592-coupler-local-mcp-server",
   "support": "https://coupler.io",
+  "icon": "icon.png",
   "server": {
     "type": "node",
     "entry_point": "dist/index.js",

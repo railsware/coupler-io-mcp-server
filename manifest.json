@@ -1,0 +1,80 @@
+{
+  "dxt_version": "0.1",
+  "name": "coupler-io-data-analyst",
+  "display_name": "Coupler.io",
+  "version": "{{APP_VERSION_PLACEHOLDER}}",
+  "description": "Connect data from hundreds of data sources and apps to analyze it with Claude.",
+  "long_description": "Key features\n\n- Access data via natural language: Analyze data without SQL or coding skills. Connect to hundreds of data flows and dashboards, and get answers just by asking like you'd ask your colleague.\n\n- Always stay up to date: Coupler.io keeps your data fresh based on the schedule you create, so Claude delivers on-demand reports and insights whenever you need them.\n\n- Blend data across sources: Combine data from multiple sources and interact with it directly in your AI chat.\n\n- Analyze big data with AI: Coupler.io MCP enables Claude to handle large datasets without limits, so you get complete insights without context window restrictions.\n\n- Turn your data into dialogue: analyze, explore, and automate insights directly in Claude.",
+  "author": {
+    "name": "Coupler.io",
+    "url": "https://coupler.io",
+    "email": "contact@coupler.io"
+  },
+  "homepage": "https://coupler.io",
+  "documentation": "https://rw.rw/couplerio/mcp",
+  "support": "https://help.coupler.io",
+  "icon": "icon.png",
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/index.js"
+      ],
+      "env": {
+        "COUPLER_ACCESS_TOKEN": "${user_config.coupler_access_token}",
+        "APP_VERSION": "{{APP_VERSION_PLACEHOLDER}}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "get-data",
+      "description": "Get data from a Coupler.io data flow run."
+    },
+    {
+      "name": "get-schema",
+      "description": "Get data table schema from a Coupler.io data flow."
+    },
+    {
+      "name": "list-dataflows",
+      "description": "List my Coupler.io data flows."
+    },
+    {
+      "name": "get-dataflow",
+      "description": "Get a Coupler.io data flow by ID."
+    }
+  ],
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=16.0.0"
+    }
+  },
+  "user_config": {
+    "coupler_access_token": {
+      "type": "string",
+      "title": "Coupler.io API access token",
+      "description": "Coupler.io API access token",
+      "required": true,
+      "sensitive": true
+    }
+  },
+  "keywords": [
+    "api",
+    "automation",
+    "analytics",
+    "coupler.io",
+    "data"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/railsware/coupler-io-mcp-server"
+  }
+}

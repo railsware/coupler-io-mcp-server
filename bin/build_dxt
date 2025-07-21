@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
+
+if [ $? -ne 0 ]; then
+  echo "Error: Not in a git repository"
+  exit 1
+fi
+
+CURRENT_DIR="$(pwd)"
+
+if [ "$CURRENT_DIR" != "$REPO_ROOT" ]; then
+  echo "Error: This script must be run from the repository root"
+  echo "Current directory: $CURRENT_DIR"
+  echo "Repository root: $REPO_ROOT"
+  echo "Please cd to the repository root and run again"
+  exit 1
+fi
+
+APP_VERSION=$(node -e 'console.log(require("./package.json").version)')
+COMMIT_SHA=$(git rev-parse --short HEAD)
+OUTPUT_FILENAME="coupler-mcp@$APP_VERSION-$COMMIT_SHA.dxt"
+
+echo "Building $OUTPUT_FILENAME"
+echo "Git revision: $COMMIT_SHA"
+
+npm run clean && npm run build
+mkdir -p dxt_build
+mkdir -p dxt_output
+cp -a dist dxt_build/dist
+
+cp icon.png dxt_build/icon.png
+cp package.json dxt_build/package.json
+cp package-lock.json dxt_build/package-lock.json
+
+sed -e "s/{{APP_VERSION_PLACEHOLDER}}/$APP_VERSION/" manifest.json > dxt_build/manifest.json
+cd dxt_build/
+
+echo "Installing production dependencies in dxt_build/"
+npm ci --omit=dev
+
+echo "Unpacked extension is in: dxt_build/"
+
+cd "$REPO_ROOT"
+
+npm run dxt:pack "dxt_output/$OUTPUT_FILENAME"

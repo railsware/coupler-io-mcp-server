@@ -1,10 +1,12 @@
 import { existsSync, writeFileSync, mkdirSync } from 'node:fs'
+import path from 'node:path'
+import os from 'node:os'
 
-import { COUPLER_ACCESS_TOKEN, NODE_ENV } from '@/env'
-import { CouplerioClient } from '@/lib/couplerio-client'
-import type { SignedUrlDto } from '@/lib/couplerio-client/dataflows/signed_url'
+import { COUPLER_ACCESS_TOKEN, NODE_ENV } from '../../env.js'
+import { CouplerioClient } from '../../lib/couplerio-client/index.js'
+import type { SignedUrlDto } from '../../lib/couplerio-client/dataflows/signed_url.js'
 
-export const DOWNLOAD_DIR = `/tmp/coupler_mcp/${NODE_ENV}/dataflows`
+export const DOWNLOAD_DIR = path.join(os.tmpdir(), 'coupler_mcp', NODE_ENV, 'dataflows')
 
 const DataflowFile = {
   sqlite: {
@@ -35,7 +37,7 @@ export class FileManager {
   }
 
   initStorage() {
-    mkdirSync(`${DOWNLOAD_DIR}/${this.dataflowId}/${this.executionId}`, { recursive: true })
+    mkdirSync(path.join(DOWNLOAD_DIR, this.dataflowId, this.executionId), { recursive: true })
   }
 
   /**
@@ -77,7 +79,7 @@ export class FileManager {
   buildFilePath(fileType: keyof typeof DataflowFile): string {
     const fileName = fileType === 'sqlite' ? DataflowFile.sqlite.name : DataflowFile.schema.name
 
-    return `${DOWNLOAD_DIR}/${this.dataflowId}/${this.executionId}/${fileName}`
+    return path.join(DOWNLOAD_DIR, this.dataflowId, this.executionId, fileName)
   }
 
   /**

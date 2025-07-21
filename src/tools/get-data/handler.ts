@@ -1,12 +1,12 @@
-import Database from 'better-sqlite3'
+import { DatabaseSync as Database } from 'node:sqlite'
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 import { fromError } from 'zod-validation-error'
 
-import { logger } from '@/logger'
-import { textResponse } from '@/util/tool-response'
-import { FileManager } from '@/tools/shared/file-manager'
+import { textResponse } from '../../util/tool-response.js'
+import { FileManager } from '../shared/file-manager.js'
+import { logger } from '../../logger/index.js'
 
-import { zodInputSchema } from './schema'
+import { zodInputSchema } from './schema.js'
 
 export const handler = async (params?: Record<string, unknown>): Promise<CallToolResult> => {
   const validationResult = zodInputSchema.safeParse(params)

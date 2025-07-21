@@ -1,6 +1,6 @@
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { handler } from './handler'
+import { handler } from './handler.js'
 
 const createMockResponse = (responseFn: () => Promise<Response>): typeof fetch => {
   return responseFn

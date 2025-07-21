@@ -1,6 +1,6 @@
-import { inputSchema, outputSchema } from './schema'
+import { inputSchema, outputSchema } from './schema.js'
 
-export { handler } from './handler'
+export { handler } from './handler.js'
 export const name = 'list-dataflows'
 export const description = 'List my Coupler.io data flows. Use this to get the ID (uuid format) of a data flow by its name.'
 

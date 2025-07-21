@@ -78,7 +78,8 @@ cp .env.example .env.local
 ### Work with a raw server
 Run the MCP server:
 ```shell
-npm run dev
+# Use `--silent` flag to prevent NPM logging to STDOUT which breaks server transport
+npm run --silent dev
 ```
 
 #### Run [MCP server inspector](https://github.com/modelcontextprotocol/inspector) for debugging
@@ -131,6 +132,16 @@ Edit your `claude_desktop_config.json`, add an entry for our server:
     }
   }
 }
+```
+
+Or just run the image with Docker:
+```
+docker run --env-file .env.local \
+  --add-host storage.test=host-gateway \
+  --add-host lvh.me=host-gateway \
+  --rm \
+  -i \
+  coupler-io-mcp-server-development
 ```
 
 ### Using MCP inspector
@@ -206,6 +217,16 @@ You should now be able to smoke-test the release image.
 docker pull ghcr.io/railsware/coupler-io-mcp-server
 ```
 Run the release image with Claude Desktop and other supported clients.
+
+## Claude Desktop extension (DXT)
+
+### Build & self-sign
+```shell
+bin/build_dxt # => dxt_output/coupler-mcp.dxt
+npm run dxt:selfsign
+```
+
+You can now either install the .dxt file or use the contents of `dxt/` dir to load unpacked extension from Developer menu.
 
 ## License
 This project is licensed under the terms of the MIT open source license. Please refer to [MIT](./LICENSE) for the full terms.

@@ -2,17 +2,35 @@
 
 # Coupler.io official MCP server
 The Coupler.io MCP Server is a Model Context Protocol (MCP) server that provides seamless integration with Coupler.io APIs.
+With Coupler.io MCP Server, you can analyze multi-channel marketing, financial, sales, e-commerce, and other business data within Claude by connecting to your Coupler.io data flows — query marketing, sales, and finance metrics from hundreds of sources. Fetch and transform raw data from platforms like Google Ads, Facebook, HubSpot, and Salesforce into actionable intelligence for smarter, faster decision-making with accurate, up-to-date business information.
 
-**⚠️ Alpha Software Warning**  
-This repo contains early alpha software under active development. Features are incomplete and subject to breaking changes.
 
 ## Use Cases
-- Extracting and analyzing data from Coupler.io data flows.
+Get data from your Coupler.io data flows and ask your AI tool questions about it, like you would ask your fellow data analyst:
+
+### Marketing: 
+1. What's our overall customer acquisition cost across all paid channels this quarter compared to last quarter? I need this for the board meeting.
+2. Show me the ROI breakdown by marketing channel for the past 6 months. I need to reallocate our annual budget.
+3. Which campaigns are contributing most to our pipeline revenue? I want to double down on what's working.
+
+### Sales:
+1. Can you pull the sales pipeline report for this month? I need to see how many deals are in each stage and the total value at each stage.
+2. What are our conversion rates from lead to opportunity and from opportunity to closed-won for the last quarter? How do they compare to our targets?
+3. How many deals are expected to close this month based on their probability scores? What's our forecasted revenue vs our monthly target?
+
+### Finance:
+1. Check the profit for this quarter, compare it to last quarter, and provide a breakdown by department.
+2. Could you provide a cash flow report for the last 30 days, including all incoming and outgoing transactions?
+3. Share the current accounts receivable status and tell me how many overdue invoices we have and which customers owe the most.
 
 ## Prerequisites
 1. Install [Docker](https://www.docker.com/) to run the server in a container.
 2. Make sure Docker is running.
-3. Get a [Coupler.io Personal Access Token](https://app.coupler.io/app/ai_features)
+3. Get a [Coupler.io Personal Access Token](https://app.coupler.io/app/mcp/).
+
+**OR**
+
+Build a .dxt file using the command below and use it to install the local MCP.
 
 ## Running the server
 ### Claude Desktop
@@ -39,16 +57,24 @@ This repo contains early alpha software under active development. Features are i
 ```
 
 NOTE: `"--pull=always"` will ensure you always have the latest image by pulling it from the registry.
-Remove this line, if you're offline or if you specifically want to use the image you've already pulled previously.
+Remove this line if you're offline or if you specifically want to use the image you've already pulled previously.
 
 ## Tools
 ### Data flows
-- **get-data** - Gets the result of a data flow run as a SQLite file and executes a read-only query on it. Currently, only data flows built from a dashboard or dataset template are supported.
+- **get-data** - Gets the result of a data flow run as a SQLite file and executes a read-only query on it. To get the data from a Coupler.io data flow, you need the data flow to have an AI destination.
   - `dataflowId`: Data flow ID (`string`, **required**)
   - `executionId`: Data flow run ID (`string`, **required**)
   - `query`: Query to run on the data flow SQLite file (`string`, **required**)
 
 - **get-schema** - Gets the data flow schema file. Currently, only data flows built from a dashboard or dataset template are supported.
+  - `dataflowId`: Data flow ID (`string`, **required**)
+  - `executionId`: Data flow run ID (`string`, **required**)
+ 
+- **list-dataflows** – Gets the list of data flows that have an AI destination.
+  - `dataflowId`: Data flow ID (`string`, **required**)
+  - `executionId`: Data flow run ID (`string`, **required**)
+ 
+- **get-dataflow** – Gets the metadata about the data flow, such as sources, data connections, last successfull execution, and error details (if present).
   - `dataflowId`: Data flow ID (`string`, **required**)
   - `executionId`: Data flow run ID (`string`, **required**)
 
@@ -97,7 +123,7 @@ tail -f log/development.log | npx pino-pretty
 You can also optionally capture STDIO messages in the log file by setting `LOG_STDIO=1` when running the server.
 If you're debugging a containerized server, you'd likely want to mount a dir at `/app/log` to be able to access the logs it generates.
 
-### Working with development Docker image
+### Working with the development Docker image
 Build Docker image for development:
 ```shell
 bin/build_image
@@ -159,7 +185,7 @@ npx @modelcontextprotocol/inspector --cli npm run dev --method tools/call --tool
 ```
 
 ### Testing the Docker image against Coupler.io staging
-We build and publish a Docker image with of our MCP server, tagged `edge`, on every push to the `main` branch.
+We build and publish a Docker image of our MCP server, tagged `edge`, on every push to the `main` branch.
 
 Configure Claude Desktop to run the Docker container against Coupler.io staging.
 Navigate to Settings > Developer > Edit Config.

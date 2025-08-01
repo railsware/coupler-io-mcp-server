@@ -30,7 +30,7 @@ export const handler = async (params?: Record<string, unknown>): Promise<CallToo
     return textResponse({ text: `Failed to get data flow ${validationResult.data.dataflowId} sqlite file. ${e}`, isError: true })
   }
 
-  const db = new Database(sqlitePath)
+  const db = new Database(sqlitePath, { readOnly: true })
   let statement, queryResult
   try {
     statement = db.prepare(validationResult.data.query)

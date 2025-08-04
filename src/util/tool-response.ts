@@ -17,3 +17,23 @@ export const textResponse = ({ text, isError = false, structuredContent }: { tex
 
   return callToolResult
 }
+
+export const buildErrorMessage = async ({
+  response,
+  customText = 'An unexpected error occurred.',
+}: {
+  response: Response,
+  customText: string,
+}): Promise<string> => {
+  let errorDetails = ''
+
+  try {
+    const { error } = (await response.json()) as { error?: { message?: string } }
+    errorDetails = error?.message ?? ''
+  } catch {
+    // Does not update for JSON parse errors
+  }
+
+  return `${customText} Response status: ${response.status}.` +
+         (errorDetails ? ` Error details: ${errorDetails}` : '')
+}

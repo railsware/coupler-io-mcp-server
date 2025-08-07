@@ -23,6 +23,12 @@ const mockListDataflowsError = createMockResponse(
   async () => new Response('Error listing dataflows', { status: 500 })
 )
 
+const mockGetDataflowErrorWithDetails = createMockResponse(
+  async () => new Response(
+    JSON.stringify({ error: { message: 'Test error message' } }), { status: 500 }
+  )
+)
+
 const mockFetch = vi.spyOn(globalThis, 'fetch')
 
 describe('listDataflows', () => {
@@ -63,7 +69,22 @@ describe('listDataflows', () => {
         isError: true,
         content: [{
           type: 'text',
-          text: 'Failed to list data flows. Response status: 500',
+          text: 'Failed to list data flows. Response status: 500.',
+        }]
+      })
+    })
+
+    it('includes error details when present', async () => {
+      mockFetch
+        .mockImplementationOnce(mockGetDataflowErrorWithDetails)
+
+      const toolResult = await handler()
+
+      expect(toolResult).toEqual({
+        isError: true,
+        content: [{
+          type: 'text',
+          text: 'Failed to list data flows. Response status: 500. Error details: Test error message',
         }]
       })
     })

@@ -3,7 +3,7 @@ import { fromError } from 'zod-validation-error'
 
 import { zodInputSchema } from './schema.js'
 
-import { textResponse } from '../../util/tool-response.js'
+import { textResponse, buildErrorMessage } from '../../util/tool-response.js'
 import { COUPLER_ACCESS_TOKEN } from '../../env.js'
 import { CouplerioClient } from '../../lib/couplerio-client/index.js'
 import { logger } from '../../logger/index.js'
@@ -33,10 +33,12 @@ export const handler = async (params?: Record<string, unknown>): Promise<CallToo
   })
 
   if (!response.ok) {
-    logger.error(`Failed to get data flow ${validationResult.data.dataflowId}. Response status: ${response.status}`)
+    const errorText = await buildErrorMessage( { response, customText: `Failed to get data flow ${validationResult.data.dataflowId}.`})
+    
+    logger.error(errorText)
     return textResponse({
       isError: true,
-      text: `Failed to get data flow ${validationResult.data.dataflowId}. Response status: ${response.status}`
+      text: errorText
     })
   }
 

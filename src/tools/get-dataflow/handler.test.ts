@@ -23,6 +23,10 @@ const mockGetDataflowError = createMockResponse(
   async () => new Response('Error when getting dataflow', { status: 500 })
 )
 
+const mockGetDataflowErrorWithDetails = createMockResponse(
+  async () => new Response(JSON.stringify({ error: { message: 'Test error message' } }), { status: 500 })
+) 
+
 const mockFetch = vi.spyOn(globalThis, 'fetch')
 
 describe('get-dataflow', () => {
@@ -63,7 +67,22 @@ describe('get-dataflow', () => {
         isError: true,
         content: [{
           type: 'text',
-          text: 'Failed to get data flow gsheet_dataflow. Response status: 500',
+          text: 'Failed to get data flow gsheet_dataflow. Response status: 500.',
+        }]
+      })
+    })
+
+    it('includes error details when present', async () => {
+      mockFetch
+        .mockImplementationOnce(mockGetDataflowErrorWithDetails)
+
+      const toolResult = await handler({ dataflowId: 'gsheet_dataflow' })
+
+      expect(toolResult).toEqual({
+        isError: true,
+        content: [{
+          type: 'text',
+          text: 'Failed to get data flow gsheet_dataflow. Response status: 500. Error details: Test error message',
         }]
       })
     })

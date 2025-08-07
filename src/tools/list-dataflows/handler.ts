@@ -1,6 +1,6 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 
-import { textResponse } from '../../util/tool-response.js'
+import { textResponse, buildErrorMessage } from '../../util/tool-response.js'
 import { COUPLER_ACCESS_TOKEN } from '../../env.js'
 import { CouplerioClient } from '../../lib/couplerio-client/index.js'
 import { logger } from '../../logger/index.js'
@@ -12,10 +12,12 @@ export const handler = async (): Promise<CallToolResult> => {
   const response = await coupler.request(`/dataflows?${query}{?type}`)
 
   if (!response.ok) {
-    logger.error(`Failed to list dataflows. Response status: ${response.status}`)
+    const errorText = await buildErrorMessage({ response, customText: 'Failed to list data flows.'})
+
+    logger.error(errorText)
     return textResponse({
       isError: true,
-      text: `Failed to list data flows. Response status: ${response.status}`
+      text: errorText
     })
   }
 

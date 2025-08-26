@@ -8,7 +8,7 @@ const zodOutputSchema = z.object({
     z.object({
       id: z.string().describe('The ID of the dataflow.'),
       name: z.string().describe('The name of the dataflow.'),
-      last_successful_execution_id: z.string().describe('The ID of the last successful run (execution) of the dataflow.')
+      last_successful_execution_id: z.string().nullish().describe('The ID of the last successful run (execution) of the dataflow.')
     }).strict()
   )
 })

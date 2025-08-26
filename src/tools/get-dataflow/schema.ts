@@ -15,7 +15,7 @@ const zodOutputSchema = z.object({
     id: z.string().describe('The ID of the data flow.'),
     name: z.string().describe('The name of the data flow.'),
     last_successful_execution_id: z.string().describe('The ID of the last successful run (execution) of the data flow.'),
-    schedule: z.string().describe('The schedule of the data flow. Crontab format.'),
+    schedule: z.string().nullish().describe('The schedule of the data flow. Crontab format.'),
     sources: z.array(z.object({
       id: z.string().describe('The ID of the source.'),
       name: z.string().describe('The name of the source.'),
@@ -23,8 +23,8 @@ const zodOutputSchema = z.object({
       params_configured: z.boolean().describe('Whether the source params are configured.'),
       enabled: z.boolean().describe('Whether the source is enabled.'),
       data_connections_count: z.number().int().nonnegative().describe('The number of data connections for the source.'),
-      last_success_run_at: z.string().describe('The date and time of the last successful run of the source. ISO 8601 format.'),
-      error_details: z.string().describe('The error details of the source.'),
+      last_success_run_at: z.string().nullish().describe('The date and time of the last successful run of the source. ISO 8601 format.'),
+      error_details: z.string().nullish().describe('The error details of the source.'),
     })).describe('The sources of the data flow.'),
   }).strict()
 })

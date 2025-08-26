@@ -31,9 +31,8 @@ export const buildErrorMessage = async ({
   try {
     const { error } = await response.json() as { error?: { message?: string } }
     errorDetails = error?.message ?? ''
-  } catch (err){
-    // Does not update for JSON parse errors
-    logger.error('Failed to parse JSON response', err)
+  } catch (err: unknown) {
+    logger.error({ err }, 'Failed to parse JSON response.')
   }
 
   return `${customText} Response status: ${response.status}.` +

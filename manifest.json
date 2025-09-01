@@ -60,7 +60,7 @@
     "coupler_access_token": {
       "type": "string",
       "title": "Coupler.io API access token",
-      "description": "Coupler.io API access token",
+      "description": "Sign up at coupler.io to get the API token",
       "required": true,
       "sensitive": true
     }

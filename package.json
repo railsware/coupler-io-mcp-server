@@ -32,7 +32,7 @@
   "devDependencies": {
     "@anthropic-ai/dxt": "0.2.6",
     "@eslint/js": "9.34.0",
-    "@modelcontextprotocol/inspector": "0.16.5",
+    "@modelcontextprotocol/inspector": "0.16.6",
     "@tsconfig/node22": "22.0.2",
     "@types/better-sqlite3": "7.6.13",
     "@types/lodash-es": "4.17.12",

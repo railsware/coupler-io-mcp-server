@@ -4,7 +4,7 @@
   "display_name": "Coupler.io",
   "version": "{{APP_VERSION_PLACEHOLDER}}",
   "description": "Connect data from hundreds of data sources and apps to analyze it with Claude.",
-  "long_description": "Key features\n\n- Access data via natural language: Analyze data without SQL or coding skills. Connect to hundreds of data flows and dashboards, and get answers just by asking like you'd ask your colleague.\n\n- Always stay up to date: Coupler.io keeps your data fresh based on the schedule you create, so Claude delivers on-demand reports and insights whenever you need them.\n\n- Blend data across sources: Combine data from multiple sources and interact with it directly in your AI chat.\n\n- Analyze big data with AI: Coupler.io MCP enables Claude to handle large datasets without limits, so you get complete insights without context window restrictions.\n\n- Turn your data into dialogue: analyze, explore, and automate insights directly in Claude.",
+  "long_description": "Key features:\n* Access data via natural language: Analyze data without SQL or coding skills. Connect to hundreds of data flows and dashboards, and get answers just by asking like you'd ask your colleague.\n* Always stay up to date: Coupler.io keeps your data fresh based on the schedule you create, so Claude delivers on-demand reports and insights whenever you need them.\n* Blend data across sources: Combine data from multiple sources and interact with it directly in your AI chat.\n* Analyze big data with AI: Coupler.io MCP enables Claude to handle large datasets without limits, so you get complete insights without context window restrictions.\n* Turn your data into dialogue: analyze, explore, and automate insights directly in Claude.",
   "author": {
     "name": "Coupler.io",
     "url": "https://coupler.io",
@@ -60,7 +60,7 @@
     "coupler_access_token": {
       "type": "string",
       "title": "Coupler.io API access token",
-      "description": "Coupler.io API access token",
+      "description": "Sign up at coupler.io to get the API token",
       "required": true,
       "sensitive": true
     }

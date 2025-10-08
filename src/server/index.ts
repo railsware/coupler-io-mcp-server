@@ -16,7 +16,7 @@ const TOOL_MAP = {
 
 export const server = new Server({
   name: 'Coupler.io MCP server',
-  version: '0.0.3',
+  version: '0.0.4',
 }, {
   capabilities: {
     tools: {},

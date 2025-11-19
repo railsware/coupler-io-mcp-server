@@ -22,6 +22,6 @@ const zodOutputSchema = z.object({
   data: z.array(
     z.record(z.unknown())
   ).describe('The data returned from the query.'),
-}).strict()
+})
 
 export const outputSchema = zodToJsonSchema(zodOutputSchema)

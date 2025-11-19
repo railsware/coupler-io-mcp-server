@@ -26,7 +26,7 @@ const zodOutputSchema = z.object({
       last_success_run_at: z.string().nullish().describe('The date and time of the last successful run of the source. ISO 8601 format.'),
       error_details: z.string().nullish().describe('The error details of the source.'),
     })).describe('The sources of the data flow.'),
-  }).strict()
+  })
 })
 
 export const outputSchema = zodToJsonSchema(zodOutputSchema)

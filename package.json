@@ -19,7 +19,7 @@
   },
   "description": "Coupler.io MCP server",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.17.4",
+    "@modelcontextprotocol/sdk": "1.24.0",
     "json-schema-to-zod": "2.6.1",
     "lodash-es": "4.17.21",
     "pino": "9.9.0",

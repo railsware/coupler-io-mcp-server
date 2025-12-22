@@ -197,6 +197,8 @@ Edit your `claude_desktop_config.json`, add an entry for the staging server:
       "command": "docker",
       "args": [
         "run",
+        "--pull",
+        "always",
         "-e",
         "COUPLER_ACCESS_TOKEN",
         "--env",

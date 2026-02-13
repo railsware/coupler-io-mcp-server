@@ -21,28 +21,28 @@ fi
 
 APP_VERSION=$(node -e 'console.log(require("./package.json").version)')
 COMMIT_SHA=$(git rev-parse --short HEAD)
-OUTPUT_FILENAME="coupler-mcp@$APP_VERSION-$COMMIT_SHA.dxt"
+OUTPUT_FILENAME="coupler-mcp@$APP_VERSION-$COMMIT_SHA.mcpb"
 
 echo "Building $OUTPUT_FILENAME"
 echo "Git revision: $COMMIT_SHA"
 
 npm run clean && npm run build
-mkdir -p dxt_build
-mkdir -p dxt_output
-cp -a dist dxt_build/dist
+mkdir -p mcpb_build
+mkdir -p mcpb_output
+cp -a dist mcpb_build/dist
 
-cp icon.png dxt_build/icon.png
-cp package.json dxt_build/package.json
-cp package-lock.json dxt_build/package-lock.json
+cp icon.png mcpb_build/icon.png
+cp package.json mcpb_build/package.json
+cp package-lock.json mcpb_build/package-lock.json
 
-sed -e "s/{{APP_VERSION_PLACEHOLDER}}/$APP_VERSION/" manifest.json > dxt_build/manifest.json
-cd dxt_build/
+sed -e "s/{{APP_VERSION_PLACEHOLDER}}/$APP_VERSION/" manifest.json > mcpb_build/manifest.json
+cd mcpb_build/
 
-echo "Installing production dependencies in dxt_build/"
+echo "Installing production dependencies in mcpb_build/"
 npm ci --omit=dev
 
-echo "Unpacked extension is in: dxt_build/"
+echo "Unpacked extension is in: mcpb_build/"
 
 cd "$REPO_ROOT"
 
-npm run dxt:pack "dxt_output/$OUTPUT_FILENAME"
+npm run mcpb:pack "mcpb_output/$OUTPUT_FILENAME"

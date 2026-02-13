@@ -7,10 +7,10 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf dist/ dxt_build/ dxt_output/",
+    "clean": "rm -rf dist/ mcpb_build/ mcpb_output/",
     "dev": "tsx --env-file=.env.local --watch src/index.ts",
-    "dxt:pack": "dxt pack dxt_build/",
-    "dxt:selfsign": "dxt sign --self-signed",
+    "mcpb:pack": "mcpb pack mcpb_build/",
+    "mcpb:selfsign": "mcpb sign --self-signed",
     "inspect:node": "npx mcp-inspector --config config/mcp-inspector/development.json --server coupler_node",
     "inspect:docker": "npx mcp-inspector --config config/mcp-inspector/development.json --server coupler_docker",
     "lint": "eslint src/ --ext .ts",

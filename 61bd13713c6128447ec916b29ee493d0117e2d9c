@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "61bd13713c6128447ec916b29ee493d0117e2d9c",
+  "prompts": {
+    "de489fe4ab8474fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "271377e0-7857-4a96-9ae1-ab675fc31b6c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Peter Laczko <peter.laczko@railsware.com>",
+      "messages": [],
+      "total_additions": 375,
+      "total_deletions": 115,
+      "accepted_lines": 260,
+      "overriden_lines": 0
+    }
+  }
+}
